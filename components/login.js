@@ -58,7 +58,7 @@ import {createStackNavigator, Assets} from '@react-navigation/stack';
       
       }
     }
-    xhr.open("POST","http://192.168.0.100:3000/auth",true);
+    xhr.open("POST","http://192.168.0.103:3000/auth",true);
     xhr.setRequestHeader("Content-type","application/json");
     xhr.send(JSON.stringify(auth));
     const validate=(xml)=>

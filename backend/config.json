@@ -1,6 +1,13 @@
-{"connection":{"host": "localhost",
-"user": "sidharth",
-"password": "carpediem_3594",
-"database": "transporter",
-"port": 8889}
+{"connection":
+    {
+        "host": "sql12.freemysqlhosting.net",
+        "user": "sql12330885",
+        "password": "dygbQmaw2b",
+        "database": "sql12330885",
+        "port":3306
+},
+"contact":{
+"header":"Completed transaction for past 30 days"    ,
+"footer":"For additional information \n contact FIFO support:..."
+}
 }

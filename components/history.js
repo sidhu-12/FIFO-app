@@ -11,6 +11,7 @@ export default class History extends Component{
         key:-1,
         visible:false,
         div:[],
+        text:[]
 
        };
        this.changeState=this.changeState.bind(this);
@@ -31,12 +32,14 @@ export default class History extends Component{
       
       }
     }
-    xhr.open("POST","http://192.168.0.100:3000/history",true);
+    xhr.open("POST","http://192.168.0.103:3000/history",true);
     xhr.setRequestHeader("Content-type","application/json");
     //console.log(name);
     xhr.send(JSON.stringify(name));
     const create=(obj)=>{
-      this.setState({op:JSON.parse(obj.responseText)})
+      this.setState({op:JSON.parse(obj.responseText)[0]})
+      this.setState({text:JSON.parse(obj.responseText)[1]})
+      console.log(this.state.text);
       //console.log(this.state.op);
     };
         }
@@ -96,7 +99,7 @@ export default class History extends Component{
      
               }
             }
-            xhr.open("POST","http://192.168.0.100:3000/driv",true);
+            xhr.open("POST","http://192.168.0.103:3000/driv",true);
             xhr.setRequestHeader("Content-type","application/json");
             //console.log(name);
           
@@ -146,9 +149,15 @@ export default class History extends Component{
 
    
     render(){
-        var output=[];
-       
-
+        var output=[],contentText=[];
+        contentText.push( <View>
+          <Text style={{fontSize:15,fontWeight:'bold',textAlign:'center'}}>{this.state.text.header}</Text>
+            </View>);
+            contentText.push(
+              <View>
+              <Text style={{fontSize:15,textAlign:'right'}}>{this.state.text.footer}</Text>
+                </View>
+            );
         for(let i=0;i<this.state.op.length;i++)
         {
            const addZero=(i)=>{
@@ -257,14 +266,13 @@ export default class History extends Component{
         />
         <View>
           <Text style={{ fontSize: 15 }}>Driven by Technology,</Text>
-
-          <Text style={{ fontSize: 15 }}>Defined By Humanity</Text>
+         <Text style={{ fontSize: 15 }}>Defined By Humanity</Text>
         </View>
-      </View>
-      <View>
-        <Text style={{fontSize:15,fontWeight:'bold',textAlign:'center'}}>Past Transaction for Past 7 days</Text>
-      </View>
+        </View>
+        {contentText[0]}
+     
       <ScrollView>{output}</ScrollView>
+     {contentText[1]}
     </View>
   );
 }
