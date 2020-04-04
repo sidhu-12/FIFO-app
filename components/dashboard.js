@@ -1,5 +1,5 @@
 import React from 'react'
-import { ScrollView,Dimensions,Keyboard, Image,Alert,StyleSheet, Button,Text,TextInput, View ,TouchableOpacity, ProgressViewIOSComponent} from 'react-native';
+import { Linking,ScrollView,Dimensions,Keyboard, Image,Alert,StyleSheet, Button,Text,TextInput, View ,TouchableOpacity, ProgressViewIOSComponent} from 'react-native';
 import SideMenu from 'react-native-side-menu';
 import { createDrawerNavigator,DrawerContentScrollView,DrawerItemList,DrawerItem } from '@react-navigation/drawer';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -20,6 +20,11 @@ function CustomDrawerContent(props) {
       <DrawerItem
         label="History"
         onPress={()=>prop.navigation.navigate("History", { uname: name })
+      }
+      />
+       <DrawerItem
+        label="Contact Us"
+        onPress={()=>Linking.openURL("https://fifofuture.in/cargo/contactus")
       }
       />
       <DrawerItem
