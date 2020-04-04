@@ -32,7 +32,7 @@ export default class History extends Component{
       
       }
     }
-    xhr.open("POST","http://192.168.0.103:3000/history",true);
+    xhr.open("POST","http://fifo-app-server.herokuapp.com/history",true);
     xhr.setRequestHeader("Content-type","application/json");
     //console.log(name);
     xhr.send(JSON.stringify(name));
@@ -62,6 +62,18 @@ export default class History extends Component{
             month = '0' + month;
             }
          var del_date=dt+"-"+month+"-"+year;
+         var date=new Date(this.state.op[i].arrival_date);
+         year = date.getFullYear();
+      month = date.getMonth()+1;
+           dt = date.getDate();
+ 
+          if (dt < 10) {
+             dt = '0' + dt;
+             }
+             if (month < 10) {
+             month = '0' + month;
+             }
+          var arrival_date=dt+"-"+month+"-"+year;
             //console.log(del_date);
             const addZero=(i)=>{
                  {
@@ -99,7 +111,7 @@ export default class History extends Component{
      
               }
             }
-            xhr.open("POST","http://192.168.0.103:3000/driv",true);
+            xhr.open("POST","http://fifo-app-server.herokuapp.com/driv",true);
             xhr.setRequestHeader("Content-type","application/json");
             //console.log(name);
           
@@ -127,6 +139,7 @@ export default class History extends Component{
             <Text style={{fontSize:20}}>Delivery Date:{del_date}</Text>
             <Text style={{fontSize:20}}>Driver Name:{this.state.driv[0].driver_name}</Text>
             <Text style={{fontSize:20}}>Mobile Number:{this.state.driv[0].mobile_number}</Text>
+            <Text style={{fontSize:20}}>Date of Arrival at the Factory:{arrival_date}</Text>
       
             </View>
           ;

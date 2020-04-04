@@ -52,7 +52,7 @@ export default class Driver_Details extends Component{
          
          }
        }
-       xhr.open("POST","http://192.168.0.103:3000/driver_details",true);
+       xhr.open("POST","http://fifo-app-server.herokuapp.com/driver_details",true);
        xhr.setRequestHeader("Content-type","application/json");
        //console.log(name);
        xhr.send(JSON.stringify(this.state));

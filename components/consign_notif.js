@@ -18,7 +18,7 @@ export default class Consign_Notif extends Component{
        this.content;
    }
     acceptForm=(i)=>{
-       Alert.alert("Please Update the Driver Details for Container Number:"+this.state.op[i].container_no);
+       Alert.alert("Please Update the Driver Details for \n Container Number:"+this.state.op[i].container_no);
        this.props.navigation.navigate('Update Driver Details',{con_no:this.state.op[i].container_no,uname:this.props.route.params.uname});
        
        }
@@ -67,7 +67,7 @@ export default class Consign_Notif extends Component{
       
       }
     }
-    xhr.open("POST","http://192.168.0.103:3000/req",true);
+    xhr.open("POST","http://fifo-app-server.herokuapp.com/req",true);
     xhr.setRequestHeader("Content-type","application/json");
     //console.log(name);
     xhr.send(JSON.stringify(name));

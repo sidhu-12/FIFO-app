@@ -58,7 +58,7 @@ import {createStackNavigator, Assets} from '@react-navigation/stack';
       
       }
     }
-    xhr.open("POST","http://192.168.0.103:3000/auth",true);
+    xhr.open("POST","http://fifo-app-server.herokuapp.com/auth",true);
     xhr.setRequestHeader("Content-type","application/json");
     xhr.send(JSON.stringify(auth));
     const validate=(xml)=>
@@ -104,9 +104,7 @@ import {createStackNavigator, Assets} from '@react-navigation/stack';
             placeholder="Enter Password"
             ref={ref => (this.passwordInput = ref)}
             placeholderTextColor="rgba(0,0,0,0.5)"
-            onChangeText={password => this.setState({ password })}
-            onSubmitEditing={this.submitForm}
-          />
+            onChangeText={password => this.setState({ password })}          />
 
           <TouchableOpacity onPress={this.handleToggle}>
             <Text style={{ fontSize: 15 }}>{this.state.toggleText}</Text>

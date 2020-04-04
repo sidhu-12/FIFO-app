@@ -90,7 +90,7 @@ class Arrived extends Component  {
          
          }
        }
-       xhr.open("POST","http://192.168.0.103:3000/date",true);
+       xhr.open("POST","http://fifo-app-server.herokuapp.com/date",true);
        xhr.setRequestHeader("Content-type","application/json");
        xhr.send(JSON.stringify(con));
        const navigate=()=>{

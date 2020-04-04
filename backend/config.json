@@ -6,6 +6,14 @@
         "database": "sql12330885",
         "port":3306
 },
+"testing":
+    {
+        "host": "localhost",
+        "user": "sidharth",
+        "password": "carpediem_3594",
+        "database": "transporter",
+        "port":8889
+},
 "contact":{
 "header":"Completed transaction for past 30 days"    ,
 "footer":"For additional information \n contact FIFO support:..."

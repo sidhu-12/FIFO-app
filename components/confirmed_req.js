@@ -34,7 +34,7 @@ export default class Confirmed_Req extends Component{
     
     }
   }
-  xhr.open("POST","http://192.168.0.103:3000/conf",true);
+  xhr.open("POST","http://fifo-app-server.herokuapp.com/conf",true);
   xhr.setRequestHeader("Content-type","application/json");
   //console.log(name);
   xhr.send(JSON.stringify(name));
@@ -104,7 +104,7 @@ export default class Confirmed_Req extends Component{
 
          }
        }
-       xhr.open("POST","http://192.168.0.103:3000/driv",true);
+       xhr.open("POST","http://fifo-app-server.herokuapp.com/driv",true);
        xhr.setRequestHeader("Content-type","application/json");
        //console.log(name);
      
