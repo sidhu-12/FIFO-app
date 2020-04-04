@@ -6,7 +6,7 @@ const app = express();
 app.use(bodyParser.json({ type: "application/json" }));
 app.use(bodyParser.urlencoded({ extended: true }));
 const config=require("./config.json");
-const con=mysql.createConnection(config.testing);
+const con=mysql.createConnection(config.connection);
 const nodemailer=require("nodemailer");
 app.listen(process.env.PORT||3000, () => {
   console.log("Listening on localhost:3000");
