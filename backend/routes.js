@@ -120,7 +120,7 @@ app.post("/date", function(req, res) {
   });
 });
 app.post("/history", function(req, res) {
-  const sql = `Select *,DATEDIFF(CURRENT_DATE(),dop) as diff from import_req where DATEDIFF(CURRENT_DATE(),dop)<7 and username='${req.body.username}' and accepted=1 and arrival_date <>'0000-00-00'`;
+  const sql = `Select *,DATEDIFF(CURRENT_DATE(),dop) as diff from import_req where DATEDIFF(CURRENT_DATE(),dop)<30 and username='${req.body.username}' and accepted=1 and arrival_date <>'0000-00-00'`;
   //console.log(sql);
   con.query(sql, function(err, results) {
     if (err) throw err;
@@ -128,7 +128,6 @@ app.post("/history", function(req, res) {
     response.push(results);
     response.push(config.contact);
     console.log(response);
-
-     res.send(response);
+    res.send(response);
   });
 });
