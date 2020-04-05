@@ -122,114 +122,147 @@ class Arrived extends Component  {
   render(){
     return (
       
-        <View style={styles.container}>
-          <View style={styles.imageContainer}>
-            <Image
-              style={{ resizeMode: "stretch" }}
-              source={require("./fifo.png")}
-            />
-            <View>
-              <Text style={{ fontSize: 15 }}>Driven by Technology,</Text>
-  
-              <Text style={{ fontSize: 15 }}>Defined By Humanity</Text>
-            </View>
-          </View>
-          <View style={styles.container1}>
-            <View style={styles.blueBox}>
-              <TouchableOpacity onPress={this.showDatepicker} style={styles.btn}>
-                <Text
-                  style={{ fontSize: 20, color: "white", textAlign: "center" }}
-                >
-                  Set Arrival Date
-                </Text>
-              </TouchableOpacity>
-              <Text style={{ fontSize: 30, color: "green" }}>
-                {this.state.actualDate}
-              </Text>
-            </View>
-            <View style={styles.blueBox}>
-              <TouchableOpacity onPress={this.showTimepicker} style={styles.btn}>
-                <Text
-                  style={{ fontSize: 20, color: "white", textAlign: "center" }}
-                >
-                  Set Arrival Time
-                </Text>
-              </TouchableOpacity>
-              <Text style={{ fontSize: 30, color: "green" }}>
-                {this.state.actualTime}
-              </Text>
-              {this.state.show && (
-                <DateTimePicker
-                  timeZoneOffsetInMinutes={0}
-                  value={new Date()}
-                  minimumDate={new Date()}
-                  mode={this.state.mode}
-                  is24Hour={true}
-                  display={this.state.display}
-                  onChange={this.onChange}
-                  neutralButtonLabel="ok"
-                />
-              )}
-            </View>
-          </View>
-          <View style={{ alignItems: "center" }}>
-            <TouchableOpacity
-              onPress={this.updateTime}
+      <View style={styles.container}>
+      <View style={styles.imageContainer}>
+        <Image
+          style={{ resizeMode: "stretch" }}
+          source={require("./fifo.png")}
+        />
+        <View style={{ flexDirection: "column" }}>
+          <Text style={{ fontSize: 15 }}>
+            Driven by <Text style={{ color: "#00c0e2" }}>Technology</Text> ,
+          </Text>
+          <Text style={{ fontSize: 15 }}>
+            Defined By <Text style={{ color: "#00c0e2" }}>Humanity</Text>
+          </Text>
+        </View>
+      </View>
+      <View style={styles.container1}>
+        <View style={styles.blueBox}>
+          <TouchableOpacity onPress={this.showDatepicker} style={styles.btn}>
+            <Text
               style={{
-                width: 200,
-                borderRadius: 40,
-                backgroundColor: "violet",
-                height: 40,
-                justifyContent: "center",
-                bottom: 50
+                fontSize: 20,
+                fontWeight: "700",
+                color: "white",
+                textAlign: "center",
               }}
             >
-              <Text style={{ fontSize: 20, color: "white", textAlign: "center" }}>
-                Update
-              </Text>
-            </TouchableOpacity>
-          </View>
+              Set Arrival Date
+            </Text>
+          </TouchableOpacity>
+          <Text
+            style={{
+              fontSize: 30,
+              color: "rgba(39, 59, 145,1)",
+            }}
+          >
+            {this.state.actualDate}
+          </Text>
         </View>
-      );
-    }
-  }
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: "white",
-      justifyContent: "space-around",
-      flexDirection: "column",
-      padding: 5
-    },
-    imageContainer: {
-      flexDirection: "row",
-      justifyContent: "space-evenly",
-      alignItems: "center",
-      padding: 10
-    },
-    container1: {
-      flex: 1,
-      flexDirection: "column",
-      justifyContent: "space-around",
-      backgroundColor: "skyblue",
-      padding: 20,
-      marginBottom: 100
-    },
-    btn: {
-      width: 200,
-      borderRadius: 40,
-      backgroundColor: "violet",
-      height: 40,
-      justifyContent: "center"
-    },
-    blueBox: {
-      flex: 1,
-      borderRadius: 25,
-      backgroundColor: "white",
-      justifyContent: "space-evenly",
-      marginTop: 10,
-      marginBottom: 10,
-      alignItems: "center"
-    }
-  });
-  export default Arrived;
+        <View style={styles.blueBox}>
+          <TouchableOpacity onPress={this.showTimepicker} style={styles.btn}>
+            <Text
+              style={{
+                fontSize: 20,
+                fontWeight: "700",
+                color: "white",
+                textAlign: "center",
+              }}
+            >
+              Set Arrival Time
+            </Text>
+          </TouchableOpacity>
+          <Text
+            style={{
+              fontSize: 30,
+              color: "rgba(39, 59, 145,1)",
+            }}
+          >
+            {this.state.actualTime}
+          </Text>
+          {this.state.show && (
+            <DateTimePicker
+              timeZoneOffsetInMinutes={0}
+              value={new Date()}
+              minimumDate={new Date()}
+              mode={this.state.mode}
+              is24Hour={true}
+              display={this.state.display}
+              onChange={this.onChange}
+              neutralButtonLabel="ok"
+            />
+          )}
+        </View>
+      </View>
+      <View style={{ alignItems: "center" }}>
+        <TouchableOpacity
+          onPress={this.updateTime}
+          style={{
+            width: 150,
+            borderRadius: 40,
+            backgroundColor: "#4f81bc",
+            height: 45,
+            justifyContent: "center",
+            bottom: 50,
+            borderColor: "#395d8a",
+            borderWidth: 3,
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 20,
+              fontWeight: "700",
+              color: "white",
+              textAlign: "center",
+            }}
+          >
+            Update
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+}
+}
+const styles = StyleSheet.create({
+container: {
+  flex: 1,
+  backgroundColor: "white",
+  flexDirection: "column",
+  padding: 5,
+},
+imageContainer: {
+  flexDirection: "row",
+  justifyContent: "space-evenly",
+  alignItems: "center",
+  padding: 5,
+},
+container1: {
+  flex: 1,
+  flexDirection: "column",
+  justifyContent: "space-around",
+  backgroundColor: "skyblue",
+  borderRadius: 25,
+  marginTop: 20,
+  padding: 20,
+  marginBottom: 100,
+},
+btn: {
+  width: 200,
+  borderRadius: 40,
+  backgroundColor: "rgba(237, 31, 36,0.9)",
+  height: 45,
+  justifyContent: "center",
+},
+blueBox: {
+  flex: 1,
+  borderRadius: 25,
+  backgroundColor: "white",
+  justifyContent: "space-evenly",
+  marginTop: 10,
+  marginBottom: 10,
+  alignItems: "center",
+},
+});
+export default Arrived;

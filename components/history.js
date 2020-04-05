@@ -200,40 +200,45 @@ export default class History extends Component{
                 console.log(dop+time);
                 console.log(this.state.op[i].dop);
                 //console.log(this.state.op[i].delivery_date);  
-            output.push(  <View
+            output.push(   <View
               style={{
                 flexDirection: "row",
                 backgroundColor: "skyblue",
                 borderRadius: 10,
                 padding: 5,
-                marginTop: 5
+                marginTop: 5,
               }}
               key={i}
             >
               <View style={{ justifyContent: "flex-start" }}>
                 <Text style={{ fontSize: 16 }}>
-                  Container No:{this.state.op[i].container_no}
+                  {"Container No.   :"} {this.state.op[i].container_no}
                 </Text>
-                <Text style={{ fontSize: 16 }}>Date of Pickup:{dop}</Text>
-                <Text style={{ fontSize: 16 }}>Time of Pickup:{time}</Text>
+    
                 <Text style={{ fontSize: 16 }}>
-                  Container Type:{this.state.op[i].container_type}
+                  {"Container Type :"} {this.state.op[i].container_type}
                 </Text>
                 <Text style={{ fontSize: 16 }}>
-                  Container Size:{this.state.op[i].container_size}
+                  {"Container Size  :"} {this.state.op[i].container_size}
+                </Text>
+                <Text style={{ fontSize: 16 }}>
+                  {"Date of Pickup  :"} {dop}
+                </Text>
+                <Text style={{ fontSize: 16 }}>
+                  {"Time of Pickup :"} {time}
                 </Text>
               </View>
               <View
                 style={{
                   flex: 1,
                   flexDirection: "column",
-                  justifyContent: "space-evenly",
+                  justifyContent: "space-around",
                   marginLeft: "auto",
-                  backgroundColor: "white",
+                  backgroundColor: "skyblue",
                   borderRadius: 10,
                   alignItems: "center",
                   margin: 5,
-                  marginLeft: 10
+                  marginLeft: 10,
                 }}
               >
                 <TouchableOpacity
@@ -241,7 +246,12 @@ export default class History extends Component{
                   onPress={() => this.changeState(i)}
                 >
                   <Text
-                    style={{ textAlign: "center", color: "white", fontSize: 17 }}
+                    style={{
+                      textAlign: "center",
+                      color: "white",
+                      fontSize: 15,
+                      fontWeight: "700",
+                    }}
                   >
                     View Details
                   </Text>
@@ -269,54 +279,65 @@ export default class History extends Component{
          {
              output.push(<View key={-1}><Text>No Request Available</Text></View>);
          }
-       
-    return (
-      <View style={styles.container}>
-      <View style={styles.imageContainer}>
-        <Image
-          style={{ resizeMode: "stretch" }}
-          source={require("./fifo.png")}
-        />
-        <View>
-          <Text style={{ fontSize: 15 }}>Driven by Technology,</Text>
-         <Text style={{ fontSize: 15 }}>Defined By Humanity</Text>
-        </View>
-        </View>
-        {contentText[0]}
-     
-      <ScrollView>{output}</ScrollView>
-     {contentText[1]}
-    </View>
-  );
-}
-}
-
-const styles = StyleSheet.create({
-container: {
-  flex: 1,
-  backgroundColor: "white",
-  justifyContent: "space-around",
-  flexDirection: "column",
-  padding: 5
-},
-imageContainer: {
-  flexDirection: "row",
-  justifyContent: "space-evenly",
-  alignItems: "center",
-  padding: 10
-},
-btn1: {
-  backgroundColor: "violet",
-  borderRadius: 25,
-  width: 110,
-  height: 35,
-  justifyContent: "center"
-},
-btn2: {
-  backgroundColor: "green",
-  borderRadius: 25,
-  width: 110,
-  height: 35,
-  justifyContent: "center"
-}
-});
+         return (
+          <View style={styles.container}>
+            <View style={styles.imageContainer}>
+              <Image
+                style={{ resizeMode: "stretch" }}
+                source={require("./fifo.png")}
+              />
+              <View style={{ flexDirection: "column" }}>
+                <Text style={{ fontSize: 15 }}>
+                  Driven by <Text style={{ color: "#00c0e2" }}>Technology</Text> ,
+                </Text>
+                <Text style={{ fontSize: 15 }}>
+                  Defined By <Text style={{ color: "#00c0e2" }}>Humanity</Text>
+                </Text>
+              </View>
+            </View>
+            <View>
+         <Text style={{textAlign:'center',fontSize:20,fontWeight:'bold'}}>{this.state.text.header}</Text>
+            </View>
+            <ScrollView
+              contentContainerStyle={{ flexGrow: 1 }}
+              showsVerticalScrollIndicator={false}
+            >
+              {output}
+            </ScrollView>
+            <View>
+         <Text style={{textAlign:'right',fontSize:16}}>{this.state.text.footer}</Text>
+            </View>
+          </View>
+        );
+      }
+    }
+    
+    const styles = StyleSheet.create({
+      container: {
+        flex: 1,
+        backgroundColor: "white",
+        flexDirection: "column",
+        padding: 5,
+      },
+      imageContainer: {
+        flexDirection: "row",
+        justifyContent: "space-evenly",
+        alignItems: "center",
+        padding: 5,
+      },
+      btn1: {
+        backgroundColor: "rgba(237, 31, 36,0.95)",
+        borderRadius: 25,
+        width: 100,
+        height: 38,
+        justifyContent: "center",
+      },
+      btn2: {
+        backgroundColor: "rgba(39, 59, 145,1)",
+        borderRadius: 25,
+        width: 100,
+        height: 38,
+        justifyContent: "center",
+      },
+    });
+    

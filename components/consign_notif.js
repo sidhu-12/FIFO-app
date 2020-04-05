@@ -13,7 +13,7 @@ export default class Consign_Notif extends Component{
 
        };
        this.acceptForm=this.acceptForm.bind(this);
-       this.rejectForm=this.rejectForm.bind(this);
+       //this.rejectForm=this.rejectForm.bind(this);
        this.changeState=this.changeState.bind(this);
        this.content;
    }
@@ -22,7 +22,7 @@ export default class Consign_Notif extends Component{
        this.props.navigation.navigate('Update Driver Details',{con_no:this.state.op[i].container_no,uname:this.props.route.params.uname});
        
        }
-   rejectForm=(i)=>{
+   /*rejectForm=(i)=>{
     Alert.alert("Rejected");
     //this.props.navigation.navigate('Consign Notification',{uname:this.props.route.params.uname});
     var con={con_no:this.state.op[i].container_no};
@@ -49,9 +49,9 @@ export default class Consign_Notif extends Component{
     const navigate=()=>{
         this.props.navigation.pop();
         this.props.navigation.push('Consign Notification',{uname:this.props.route.params.uname});
-    }
+    }*/
 
-    }
+    
      createList=()=>{
         const {uname}=this.props.route.params;
         var name={username:uname};
@@ -66,6 +66,7 @@ export default class Consign_Notif extends Component{
         
       
       }
+      
     }
     xhr.open("POST","http://fifo-app-server.herokuapp.com/req",true);
     xhr.setRequestHeader("Content-type","application/json");
@@ -195,16 +196,20 @@ export default class Consign_Notif extends Component{
             >
               <View style={{ justifyContent: "flex-start" }}>
                 <Text style={{ fontSize: 16 }}>
-                  Container No:{this.state.op[i].container_no}
-                </Text>
-                <Text style={{ fontSize: 16 }}>Date of Pickup:{dop}</Text>
-                <Text style={{ fontSize: 16 }}>Time of Pickup:{time}</Text>
-                <Text style={{ fontSize: 16 }}>
-                  Container Type:{this.state.op[i].container_type}
+                {"Container No.   :"} {this.state.op[i].container_no}
                 </Text>
                 <Text style={{ fontSize: 16 }}>
-                  Container Size:{this.state.op[i].container_size}
+                {"Container Type :"}{this.state.op[i].container_type}
                 </Text>
+                <Text style={{ fontSize: 16 }}>
+                {"Container Size  :"}{this.state.op[i].container_size}
+                </Text>
+                <Text style={{ fontSize: 16 }}>
+              {"Date of Pickup  :"} {dop}
+            </Text>
+            <Text style={{ fontSize: 16 }}>
+              {"Time of Pickup :"} {time}
+            </Text>
               </View>
               <View
                 style={{
@@ -212,7 +217,7 @@ export default class Consign_Notif extends Component{
                   flexDirection: "column",
                   justifyContent: "space-evenly",
                   marginLeft: "auto",
-                  backgroundColor: "white",
+                  backgroundColor: "skyblue",
                   borderRadius: 10,
                   alignItems: "center",
                   margin: 5,
@@ -224,7 +229,7 @@ export default class Consign_Notif extends Component{
                   onPress={() => this.changeState(i)}
                 >
                   <Text
-                    style={{ textAlign: "center", color: "white", fontSize: 17 }}
+                    style={{ textAlign: "center", color: "white", fontSize: 17, fontWeight: "700", }}
                   >
                     View Details
                   </Text>
@@ -234,7 +239,7 @@ export default class Consign_Notif extends Component{
                   onPress={() => this.acceptForm(i)}
                 >
                   <Text
-                    style={{ textAlign: "center", color: "white", fontSize: 17 }}
+                    style={{ textAlign: "center", color: "white", fontSize: 17,fontWeight: "700", }}
                   >
                     Accept
                   </Text>
@@ -269,14 +274,18 @@ export default class Consign_Notif extends Component{
         <Image
           style={{ resizeMode: "stretch" }}
           source={require("./fifo.png")}
-        />
-        <View>
-          <Text style={{ fontSize: 15 }}>Driven by Technology,</Text>
-
-          <Text style={{ fontSize: 15 }}>Defined By Humanity</Text>
-        </View>
+        /><View style={{ flexDirection: "column" }}>
+        <Text style={{ fontSize: 15 }}>
+          Driven by <Text style={{ color: "#00c0e2" }}>Technology</Text> ,
+        </Text>
+        <Text style={{ fontSize: 15 }}>
+          Defined By <Text style={{ color: "#00c0e2" }}>Humanity</Text>
+        </Text>
       </View>
-      <ScrollView>{output}</ScrollView>
+      </View>
+      <ScrollView
+      contentContainerStyle={{ flexGrow: 1 }}
+          showsVerticalScrollIndicator={false}>{output}</ScrollView>
     </View>
   );
 }
@@ -286,7 +295,6 @@ const styles = StyleSheet.create({
 container: {
   flex: 1,
   backgroundColor: "white",
-  justifyContent: "space-around",
   flexDirection: "column",
   padding: 5
 },
@@ -297,17 +305,17 @@ imageContainer: {
   padding: 10
 },
 btn1: {
-  backgroundColor: "violet",
+  backgroundColor: "rgba(237, 31, 36,0.95)",
   borderRadius: 25,
-  width: 110,
-  height: 35,
-  justifyContent: "center"
+  width: 100,
+  height: 38,
+  justifyContent: "center",
 },
 btn2: {
-  backgroundColor: "green",
+  backgroundColor: "rgba(39, 59, 145,1)",
   borderRadius: 25,
-  width: 110,
-  height: 35,
-  justifyContent: "center"
-}
+  width: 100,
+  height: 38,
+  justifyContent: "center",
+},
 });

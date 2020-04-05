@@ -61,7 +61,7 @@ transporter.sendMail(mailOptions, function(error, info){
 
 app.post("/auth", function(req, res) {
   //const sql=`Call authenticate(?,?)`;
-  const sql = `Select * from user_login where username='${req.body.username}' and password='${req.body.password}'`;
+  const sql = `Select * from user_login where username= BINARY '${req.body.username}' and password= BINARY '${req.body.password}'`;
   
   //console.log(sql);
   con.query(sql, function(err, results) {

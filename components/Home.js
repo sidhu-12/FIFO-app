@@ -52,13 +52,14 @@ const styles = StyleSheet.create({
     marginTop: 10
   },
   btnLogin: {
-    width: 100,
+    width: 150,
     height: 45,
+    borderRadius: 40,
     backgroundColor: "#4f81bc",
     justifyContent: "center",
     marginTop: 40,
     borderColor: "#395d8a",
-    borderWidth: 3
+    borderWidth: 3,
   }
 });
 

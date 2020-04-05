@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Dimensions,ScrollView,Platform, Picker,Alert,StyleSheet, Button,Text,TextInput, View ,TouchableOpacity,Switch,Image} from 'react-native';
+import {KeyboardAvoidingView, Dimensions,ScrollView,Platform, Picker,Alert,StyleSheet, Button,Text,TextInput, View ,TouchableOpacity,Switch,Image} from 'react-native';
 
 export default class Driver_Details extends Component{
    constructor(props)
@@ -70,112 +70,124 @@ export default class Driver_Details extends Component{
     render(){
     return (
       
-        <View style={styles.container}>
-          <View style={styles.imageContainer}>
-            <Image
-              style={{ resizeMode: "stretch" }}
-              source={require("./fifo.png")}
-            />
-            <View>
-              <Text style={{ fontSize: 15 }}>Driven by Technology,</Text>
-  
-              <Text style={{ fontSize: 15 }}>Defined By Humanity</Text>
-            </View>
+      <KeyboardAvoidingView
+      style={styles.container}
+      behavior="padding"
+      keyboardVerticalOffset={100}
+    >
+      <ScrollView>
+        <View style={styles.imageContainer}>
+          <Image
+            style={{ resizeMode: "stretch" }}
+            source={require("./fifo.png")}
+          />
+          <View style={{ flexDirection: "column" }}>
+            <Text style={{ fontSize: 15 }}>
+              Driven by <Text style={{ color: "#00c0e2" }}>Technology</Text> ,
+            </Text>
+            <Text style={{ fontSize: 15 }}>
+              Defined By <Text style={{ color: "#00c0e2" }}>Humanity</Text>
+            </Text>
           </View>
-          <View style={{ bottom: 20 }}>
-            <Text style={{ fontSize: 20 }}>Driver's Name</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Eg:Raj"
-              onChangeText={name => this.setState({ name })}
-            />
-          </View>
-          <View style={{ bottom: 20 }}>
-            <Text style={{ fontSize: 20 }}>Mobile Number</Text>
-  
-            <TextInput
-              style={styles.input}
-              placeholder="Eg:9876543210"
-              onChangeText={mob_no => this.setState({ mob_no })}
-            />
-          </View>
-          <View style={{ bottom: 20 }}>
-            <Text style={{ fontSize: 20 }}>Truck Number</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Eg:TN01PP1234"
-              onChangeText={truck_no => this.setState({ truck_no })}
-            />
-          </View>
-          <View style={{ bottom: 20 }}>
-            <Text style={{ fontSize: 20 }}>Round Trip</Text>
-            <View
-              style={{
-                height: 45,
-                width: 150,
-                paddingLeft: 10,
-                marginTop: 10,
-                marginLeft: 10,
-                backgroundColor: "rgba(0,0,0,0.1)",
-                borderRadius: 45,
-                justifyContent: "center"
-              }}
-            >
-              <Picker
-                mode="dropdown"
-                selectedValue={this.state.round_trip}
-                onValueChange={(itemValue, itemIndex) =>
-                  this.setState({ round_trip: itemValue })
-                }
-              >
-                <Picker.Item label="Yes" value="Y" />
-                <Picker.Item label="No" value="N" />
-              </Picker>
-            </View>
-          </View>
-          <View style={{ bottom: 20, alignItems: "center" }}>
-            <TouchableOpacity
-              onPress={this.submitForm}
-              style={{
-                width: WIDTH - 60,
-                height: 45,
-                borderRadius: 25,
-                backgroundColor: "skyblue",
-                justifyContent: "center"
-              }}
-            >
-              <Text style={{ color: "white", textAlign: "center", fontSize: 20 }}>
-                Submit
-              </Text>
-            </TouchableOpacity>
-            </View>
         </View>
-      );
-    }
-  }
-  const { width: WIDTH } = Dimensions.get("window");
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: "white",
-      padding: 10,
-      flexDirection: "column",
-      justifyContent: "space-evenly"
-    },
-    imageContainer: {
-      flexDirection: "row",
-      justifyContent: "space-evenly",
-      alignItems: "center",
-      bottom: 20
-    },
-    input: {
-      width: WIDTH - 60,
-      height: 45,
-      borderRadius: 25,
-      fontSize: 20,
-      backgroundColor: "rgba(0,0,0,0.1)",
-      paddingLeft: 20,
-      marginTop: 10,
-      marginLeft: 10
-    }
-  });
+        <View>
+    <Text style={{fontSize:20,fontWeight:'bold',textAlign:'center'}}>Container No:{this.state.container_no}</Text>
+          <Text style={{ fontSize: 20 }}>Driver's Name</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Eg:Raj"
+            onChangeText={(name) => this.setState({ name })}
+          />
+        </View>
+        <View>
+          <Text style={{ fontSize: 20, marginTop: 5 }}>Mobile Number</Text>
+
+          <TextInput
+            style={styles.input}
+            placeholder="Eg:9876543210"
+            onChangeText={(mob_no) => this.setState({ mob_no })}
+          />
+        </View>
+        <View>
+          <Text style={{ fontSize: 20, marginTop: 5 }}>Truck Number</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Eg:TN01PP1234"
+            onChangeText={(truck_no) => this.setState({ truck_no })}
+          />
+        </View>
+
+        <View>
+          <Text style={{ fontSize: 20, marginTop: 5 }}>Round Trip</Text>
+          <View
+            style={{
+              height: 45,
+              width: 150,
+              paddingLeft: 10,
+              marginTop: 10,
+              marginLeft: 10,
+              backgroundColor: "rgba(0,0,0,0.1)",
+              borderRadius: 45,
+              justifyContent: "center",
+            }}
+          >
+            <Picker
+              mode="dropdown"
+              selectedValue={this.state.round_trip}
+              onValueChange={(itemValue, itemIndex) =>
+                this.setState({ round_trip: itemValue })
+              }
+            >
+              <Picker.Item label="Yes" value="Y" />
+              <Picker.Item label="No" value="N" />
+            </Picker>
+          </View>
+        </View>
+        <View style={{ alignItems: "center" }}>
+          <TouchableOpacity
+            onPress={this.submitForm}
+            style={{
+              width: WIDTH - 60,
+              height: 45,
+              borderRadius: 25,
+              backgroundColor: "skyblue",
+              justifyContent: "center",
+              marginTop: 40,
+            }}
+          >
+            <Text
+              style={{ color: "white", textAlign: "center", fontSize: 20 }}
+            >
+              Submit
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
+  );
+}
+}
+const { width: WIDTH } = Dimensions.get("window");
+const styles = StyleSheet.create({
+container: {
+  flex: 1,
+  backgroundColor: "white",
+  padding: 10,
+  flexDirection: "column",
+},
+imageContainer: {
+  flexDirection: "row",
+  justifyContent: "space-evenly",
+  alignItems: "center",
+},
+input: {
+  width: WIDTH - 60,
+  height: 45,
+  borderRadius: 25,
+  fontSize: 20,
+  backgroundColor: "rgba(0,0,0,0.1)",
+  paddingLeft: 20,
+  marginTop: 10,
+  marginLeft: 10,
+},
+});

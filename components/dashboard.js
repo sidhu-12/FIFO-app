@@ -1,15 +1,23 @@
 import React from 'react'
-import { Linking,ScrollView,Dimensions,Keyboard, Image,Alert,StyleSheet, Button,Text,TextInput, View ,TouchableOpacity, ProgressViewIOSComponent} from 'react-native';
+import { Linking,ScrollView,Dimensions,Keyboard, Image,Alert,StyleSheet, Button,Text,TextInput, View ,TouchableOpacity} from 'react-native';
 import SideMenu from 'react-native-side-menu';
 import { createDrawerNavigator,DrawerContentScrollView,DrawerItemList,DrawerItem } from '@react-navigation/drawer';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import History from './history.js';
 import Login from './login.js';
 const Drawer=createDrawerNavigator();
-var name,prop;
+var name,prop,prop1;
 function CustomDrawerContent(props) {
   return (
     <DrawerContentScrollView>
+      <View style={{flexDirection:"row"}}>
+        <Image source={require("../assets/guest-user.jpg")} style={{
+              width: 40,
+              height: 40,
+              borderRadius: 40 / 2,
+              marginLeft: 15,
+              marginTop:5
+            }}/>
          <DrawerItem
         label={name}
         style={{alignSelf:'flex-end',}}
@@ -17,6 +25,7 @@ function CustomDrawerContent(props) {
         onPress={()=>prop.navigation.navigate("Dashboard", { uname: name })
       }
       />
+      </View>
       <DrawerItem
         label="History"
         onPress={()=>prop.navigation.navigate("History", { uname: name })
@@ -38,35 +47,39 @@ function CustomDrawerContent(props) {
 const DashboardDrawer=(props)=>{
    name=props.route.params.name;
     prop=props;
-   /*const CustomDrawerContent=(props) =>{
-    return (
-      <DrawerContentScrollView>
-        <DrawerItemList  />
-        <DrawerItem
-          label="History"
-          onPress={props.navigation.navigate("History", { uname: name })
-        }
+    props.navigation.setOptions({
+      headerLeft:()=>(
+        <TouchableOpacity
+        onPress={()=>prop1.navigation.toggleDrawer()}
+        >
+        <Image
+          source={
+            require("../assets/side-menu.png")
+          }
+          
+          style={{
+            width: 40,
+            height: 40,
+            borderRadius: 40 / 2,
+            marginLeft: 15,
+          }}
         />
-        <DrawerItem
-          label="Logout"
-          onPress={props.navigation.popToTop()
-        }
-        />
-      </DrawerContentScrollView>
-    );
-  }*/
+        </TouchableOpacity>
+      )
+  
+    })
    
-  return (
+    return (
     
-    <Drawer.Navigator initialRouteName="Dashboard" drawerType="front" drawerContent={(props)=><CustomDrawerContent/>}>
+    <Drawer.Navigator initialRouteName="Dashboard" drawerType="front" drawerPosition="left" drawerContent={(props)=><CustomDrawerContent/>}>
       <Drawer.Screen name="Dashboard" component={Dashboard} />
       </Drawer.Navigator>
   );
 }
 const Dashboard = (props) => {
-   Keyboard.dismiss();
-   props.navigation.openDrawer();
-
+  
+ 
+prop1=props;
    return (
            <View style={styles.container}>
           <View style={styles.imageContainer}>
@@ -74,15 +87,19 @@ const Dashboard = (props) => {
               style={{ resizeMode: "stretch" }}
               source={require("./fifo.png")}
             />
-            <View>
-              <Text style={{ fontSize: 15 }}>Driven by Technology,</Text>
-    
-              <Text style={{ fontSize: 15 }}>Defined By Humanity</Text>
-            </View>
-          </View>
+           <View style={{ flexDirection: "column" }}>
+          <Text style={{ fontSize: 15 }}>
+            Driven by <Text style={{ color: "#00c0e2" }}>Technology</Text> ,
+          </Text>
+          <Text style={{ fontSize: 15 }}>
+            Defined By <Text style={{ color: "#00c0e2" }}>Humanity</Text>
+          </Text>
+        </View>
+      </View>
           <Text style={{ fontSize: 25, textAlign: "center" }}>
             Welcome {name} !
           </Text>
+          <ScrollView contentContainerStyle={{ flexGrow: 1, alignItems: "center" }}>
           <TouchableOpacity
             style={styles.boxOne}
             onPress={() =>
@@ -111,15 +128,16 @@ const Dashboard = (props) => {
           >
             <Text style={styles.inside}>Update Shipper Arrival</Text>
           </TouchableOpacity>
+          </ScrollView>
         </View>
       );
     };
-    
+    const { width: WIDTH } = Dimensions.get("window");
     const styles = StyleSheet.create({
       container: {
         flex: 1,
         backgroundColor: "white",
-        justifyContent: "space-evenly",
+        //justifyContent: "space-evenly",
         flexDirection: "column",
         padding: 10
       },
@@ -129,29 +147,35 @@ const Dashboard = (props) => {
         alignItems: "center"
       },
       boxOne: {
-        backgroundColor: "pink",
+        backgroundColor: "rgba(237, 31, 36,0.85)",
         borderRadius: 10,
-        height: Dimensions.get("window").height / 5,
+        width: WIDTH - 60,
+        height: 100,
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        marginTop: 60,
       },
       boxTwo: {
-        backgroundColor: "gold",
+        backgroundColor: "rgba(39, 59, 145,0.9)",
         borderRadius: 10,
-        height: Dimensions.get("window").height / 5,
+        width: WIDTH - 60,
+        height: 100,
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        marginTop: 20,
       },
       boxThree: {
-        backgroundColor: "skyblue",
+        backgroundColor: "rgba(237, 31, 36,0.85)",
         borderRadius: 10,
-        height: Dimensions.get("window").height / 5,
+        width: WIDTH - 60,
+        height: 100,
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        marginTop: 20,
       },
       inside: {
         color: "white",
-        fontSize: 25
-      }
-   });
+        fontSize: 25,
+      },
+    });
 export default DashboardDrawer;

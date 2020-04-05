@@ -83,13 +83,17 @@ import {createStackNavigator, Assets} from '@react-navigation/stack';
             style={{ resizeMode: "stretch" }}
             source={require("./fifo.png")}
           />
-          <View>
-            <Text style={{ fontSize: 15 }}>Driven by Technology,</Text>
-
-            <Text style={{ fontSize: 15 }}>Defined By Humanity</Text>
+           <View style={{ flexDirection: "column" }}>
+            <Text style={{ fontSize: 15 }}>
+              Driven by <Text style={{ color: "#00c0e2" }}>Technology</Text> ,
+            </Text>
+            <Text style={{ fontSize: 15 }}>
+              Defined By <Text style={{ color: "#00c0e2" }}>Humanity</Text>
+            </Text>
           </View>
         </View>
-        <KeyboardAvoidingView style={styles.loginContainer}>
+        <KeyboardAvoidingView  behavior="padding"
+      keyboardVerticalOffset={100} style={styles.loginContainer}>
           <TextInput
             style={styles.input}
             underlineColorAndroid="transparent"
@@ -152,80 +156,8 @@ const styles = StyleSheet.create({
     marginTop: 40
   },
   loginContainer: {
-    marginTop: 100,
+    marginTop: 30,
     alignItems: "center"
   }
 });
-   /* return(
- 
-      <View style={styles.container}>
-      <View style={{flex:1,flexDirection:'column',alignItems:'flex-start'}}>
-      <Image style={{resizeMode:'contain'}}source={require('./fifo.png')}/>
-      <Text style={{fontSize:16}}>Driven by Technology,Defined by Humanity</Text>
-      </View>
-      <KeyboardAvoidingView behavior={Platform.Os == "ios" ? "padding" : "padding"} style={styles.container1}>
-      <View style={{flexDirection:'row'}}>
-     
-       <View style={{alignItems:'flex-start',justifyContent:'flex-start'}}>
-      <Text style={{marginLeft:'auto',fontSize:22}}>Username:
-      </Text>
-      </View>
-      <View style={{alignItems:'flex-end'}}>
-      <TextInput  
-                    style={{height: 30, fontSize: 20,width:300,borderColor: "#000000",
-                    borderBottomWidth: 1,}}  
-                    placeholder="Enter UserName"  
-                    onChangeText={username => this.setState({username})}
-                   
-                />
-                </View>
-                </View>
-                
-                <View style={{flexDirection:'row',marginLeft:'auto'}}>
-                  <Text style={{marginLeft:'auto',fontSize:22}}>Password:</Text>
-            
-
-      <TextInput  secureTextEntry={this.state.isPasswordVisible}
-                    style={{height: 30,borderColor: "#000000",
-                    borderBottomWidth: 1, fontSize: 20,width:300}}  
-                    placeholder="Enter Password" 
-                    ref={ref => (this.passwordInput = ref)} 
-                    onChangeText={password => this.setState({password})}
-                    onSubmitEditing={this.submitForm} 
-                />
-                </View>
-                
-                <View>
-                 <TouchableOpacity onPress={this.handleToggle}>  
-                 <Text  style={{fontSize: 20}}>{this.state.toggleText}</Text>  
-                 </TouchableOpacity>
-                 </View>
-      <Button  
-                        onPress={this.submitForm}  
-                        style={{padding:50,width:70}}
-                        title="Login"  
-                    />  
-    
-     </KeyboardAvoidingView>
-     </View>
-
-  );
-
-    }
-    }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  
-    backgroundColor: 'white',
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-  },
-  container1: {
-    flex: 1,
-    backgroundColor: 'white',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-  },
-});*/
  export default Login;
