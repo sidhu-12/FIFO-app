@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Transporter",
-    "slug": "Transporter",
+    "slug": "fifo_app",
     "privacy": "public",
     "platforms": [
       "ios",

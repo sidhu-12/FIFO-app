@@ -199,10 +199,10 @@ export default class Consign_Notif extends Component{
                 {"Container No.   :"} {this.state.op[i].container_no}
                 </Text>
                 <Text style={{ fontSize: 16 }}>
-                {"Container Type :"}{this.state.op[i].container_type}
+                {"Container Type :"} {this.state.op[i].container_type}
                 </Text>
                 <Text style={{ fontSize: 16 }}>
-                {"Container Size  :"}{this.state.op[i].container_size}
+                {"Container Size  :"} {this.state.op[i].container_size}
                 </Text>
                 <Text style={{ fontSize: 16 }}>
               {"Date of Pickup  :"} {dop}
