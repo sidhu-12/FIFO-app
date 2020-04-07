@@ -2,8 +2,9 @@ import 'react-native-gesture-handler';
 import DrawerLayout from 'react-native-gesture-handler/DrawerLayout';
 import React,{Component} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { Dimensions,ImageBackground,Keyboard,Platform,Alert,StyleSheet,StatusBar, Button,Text,TextInput, View ,TouchableOpacity,Image,KeyboardAvoidingView} from 'react-native';
+import { Dimensions,ImageBackground,Keyboard,Platform,Alert,StyleSheet,StatusBar, Button,Text,TextInput, View ,TouchableOpacity,Image,KeyboardAvoidingView,TouchableWithoutFeedback} from 'react-native';
 import {createStackNavigator, Assets} from '@react-navigation/stack';
+
 //import { createDrawerNavigator } from '@react-navigation/drawer';
 
 
@@ -29,13 +30,8 @@ import {createStackNavigator, Assets} from '@react-navigation/stack';
           this.setState({ toggleText: 'Show' });  
       }  
   };  
-  componentWillUnmount=()=>{
-    if(Platform.OS=='ios')
-    {
-        Keyboard.dismiss();
-    }
-  }
   submitForm =()=>{ 
+    Keyboard.dismiss();
     const {username,password}=this.state;
     if(this.state.username==''||this.state.password=='')
     {
@@ -77,6 +73,7 @@ import {createStackNavigator, Assets} from '@react-navigation/stack';
 }
   render() {
     return (
+      <TouchableWithoutFeedback onPress={()=>{Keyboard.dismiss()}}>
       <View style={styles.container}>
         <View style={styles.imageContainer}>
           <Image
@@ -122,6 +119,7 @@ import {createStackNavigator, Assets} from '@react-navigation/stack';
           
         </KeyboardAvoidingView>
       </View>
+      </TouchableWithoutFeedback>
     );
   }
 }

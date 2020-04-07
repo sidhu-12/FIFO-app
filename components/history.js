@@ -73,17 +73,20 @@ export default class History extends Component{
              if (month < 10) {
              month = '0' + month;
              }
+             const addZero=(i)=>{
+              {
+                 if (i < 10) {
+                   i = "0" + i;
+                 }
+                 return i;
+               }
+               
+         }
           var arrival_date=dt+"-"+month+"-"+year;
+          var hrs1=addZero(date.getHours());
+          var mins1=addZero(date.getMinutes());
+          var arrival_time=hrs1+":"+mins1; 
             //console.log(del_date);
-            const addZero=(i)=>{
-                 {
-                    if (i < 10) {
-                      i = "0" + i;
-                    }
-                    return i;
-                  }
-                  
-            }
             var date1=new Date(this.state.op[i].dop);
             var year1 = date1.getFullYear();
            var month1 = date1.getMonth()+1;
@@ -140,6 +143,7 @@ export default class History extends Component{
             <Text style={{fontSize:20}}>Driver Name:{this.state.driv[0].driver_name}</Text>
             <Text style={{fontSize:20}}>Mobile Number:{this.state.driv[0].mobile_number}</Text>
             <Text style={{fontSize:20}}>Date of Arrival at the Factory:{arrival_date}</Text>
+            <Text style={{fontSize:20}}>Time of Arrival at the Factory:{arrival_time}</Text>
       
             </View>
           ;

@@ -194,7 +194,7 @@ call(args).catch(console.error)
          output.push(   <View
           style={{
             flexDirection: "row",
-            backgroundColor: "skyblue",
+            backgroundColor: "lightgrey",
             borderRadius: 10,
             padding: 5,
             marginTop: 5,
@@ -229,7 +229,7 @@ call(args).catch(console.error)
               flexDirection: "column",
               justifyContent: "space-around",
               marginLeft: "auto",
-              backgroundColor: "skyblue",
+              backgroundColor: "lightgrey",
               borderRadius: 10,
               alignItems: "center",
               margin: 5,

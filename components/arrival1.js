@@ -4,8 +4,11 @@ import {   Text,
   TouchableOpacity,
   View,
   Button,
-  Image,StyleSheet, Alert} from 'react-native';
+  ScrollView,
+  Image,StyleSheet, Alert, Platform} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import Modal, { ModalFooter, ModalButton, ModalContent ,SlideAnimation} from 'react-native-modals';
 class Arrived extends Component  {
   constructor(props) {
     super(props);
@@ -17,16 +20,18 @@ class Arrived extends Component  {
       mode:'date',
       display:'default',
     };
-    this.actualDate=new Date();
-    this.actualTime=new Date();
+    this.actualDate="";
+    this.actualTime="";
    // this.onChange=this.onChange.bind(this);
   }
   
      onChange= async (event, selectedDate) => {
-       this.setState({show:false});
+
        if(selectedDate!=undefined&&this.state.mode=='date')
        {
-          this.setState({chosenDate:selectedDate})
+       
+         console.log(selectedDate);
+          this.setState({chosenDate:selectedDate});
           var date=new Date(this.state.chosenDate);
           year = date.getFullYear();
           month = date.getMonth()+1;
@@ -66,6 +71,52 @@ class Arrived extends Component  {
           //this.setState({show:false});
       
     };
+    onChangeIOS=(selectedDate) => {
+     
+      this.setState({show:false});
+      if(selectedDate!=undefined&&this.state.mode=='date')
+    {
+         this.setState({chosenDate:selectedDate});
+        
+         var date=new Date(this.state.chosenDate);
+        var  year = date.getFullYear();
+         var month = date.getMonth()+1;
+             var  dt = date.getDate();
+  
+             if (dt < 10) {
+                dt = '0' + dt;
+                }
+                if (month < 10) {
+                month = '0' + month;
+                }
+             var del_date=dt+"-"+month+"-"+year;
+             this.actualDate=year+"-"+month+"-"+dt;
+             this.setState({actualDate:del_date});
+              console.log(del_date);
+         }
+         else if(selectedDate!=undefined&&this.state.mode=='time')
+         {
+           this.setState({chosenDate:selectedDate})
+           const addZero=(i)=>{
+             {
+                if (i < 10) {
+                  i = "0" + i;
+                }
+                return i;
+              }
+              
+        }
+        var date1=new Date(this.state.chosenDate);
+      var hrs1=addZero(date1.getHours());
+      var mins1=addZero(date1.getMinutes());
+        var dop=hrs1+":"+mins1;
+         this.actualTime=dop+":00";
+        this.setState({actualTime:dop});
+        console.log(dop);
+         }
+         //this.setState({show:false});
+     
+   };
     updateTime=()=>{
       if(this.actualDate==''||this.actualTime=='')
       {
@@ -114,12 +165,127 @@ class Arrived extends Component  {
     
       
     };
-  
+  showDateTimePicker=()=>{
+    this.showMode("datetime");
+    this.setState({display:'default'})
+  }
      showTimepicker = () => {
       this.showMode('time');
-      this.setState({display:''});
+      this.setState({display:'default'});
     };
   render(){
+    var minDate=new Date();
+    minDate.setDate(minDate.getDate()-2);
+    if(Platform.OS=='ios')
+    {
+      return (
+      
+        <View style={styles.container}>
+        <View style={styles.imageContainer}>
+          <Image
+            style={{ resizeMode: "stretch" }}
+            source={require("./fifo.png")}
+          />
+          <View style={{ flexDirection: "column" }}>
+            <Text style={{ fontSize: 15 }}>
+              Driven by <Text style={{ color: "#00c0e2" }}>Technology</Text> ,
+            </Text>
+            <Text style={{ fontSize: 15 }}>
+              Defined By <Text style={{ color: "#00c0e2" }}>Humanity</Text>
+            </Text>
+          </View>
+        </View>
+        <View style={styles.container1}>
+          <View style={styles.blueBox}>
+            <TouchableOpacity onPress={this.showDatepicker} style={styles.btn}>
+              <Text
+                style={{
+                  fontSize: 20,
+                  fontWeight: "700",
+                  color: "white",
+                  textAlign: "center",
+                }}
+              >
+                Set Arrival Date
+              </Text>
+            </TouchableOpacity>
+            <Text
+              style={{
+                fontSize: 30,
+                color: "rgba(39, 59, 145,1)",
+              }}
+            >
+              {this.state.actualDate}
+            </Text>
+            </View>
+            <View style={styles.blueBox}>
+            <TouchableOpacity onPress={this.showTimepicker} style={styles.btn}>
+              <Text
+                style={{
+                  fontSize: 20,
+                  fontWeight: "700",
+                  color: "white",
+                  textAlign: "center",
+                }}
+              >
+                Set Arrival Time
+              </Text>
+            </TouchableOpacity>
+            <Text
+              style={{
+                fontSize: 30,
+                color: "rgba(39, 59, 145,1)",
+              }}
+            >
+              {this.state.actualTime}
+            </Text>
+
+          </View>
+          <DateTimePickerModal
+          isVisible={this.state.show}
+          locale="en_GB"
+          cancelTextIOS="Exit"
+          //date={new Date()}
+          mode={this.state.mode}
+          onCancel={()=>{this.setState({show:false})}}
+          onConfirm={(date)=> setTimeout(() => {
+            this.onChangeIOS(date)
+          }, 250)}
+          minuteInterval="15"
+          minimumDate={minDate}
+              />
+          </View>
+        <View style={{ alignItems: "center" }}>
+          <TouchableOpacity
+            onPress={this.updateTime}
+            style={{
+              width: 150,
+              borderRadius: 40,
+              backgroundColor: "#4f81bc",
+              height: 45,
+              justifyContent: "center",
+              bottom: 50,
+              borderColor: "#395d8a",
+              borderWidth: 3,
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 20,
+                fontWeight: "700",
+                color: "white",
+                textAlign: "center",
+              }}
+            >
+              Update
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+    }
+    else
+    {
     return (
       
       <View style={styles.container}>
@@ -181,11 +347,13 @@ class Arrived extends Component  {
           >
             {this.state.actualTime}
           </Text>
-          {this.state.show && (
+
+          
+          {this.state.show&& (
             <DateTimePicker
               timeZoneOffsetInMinutes={0}
               value={new Date()}
-              minimumDate={new Date()}
+              minimumDate={minDate}
               mode={this.state.mode}
               is24Hour={true}
               display={this.state.display}
@@ -193,6 +361,7 @@ class Arrived extends Component  {
               neutralButtonLabel="ok"
             />
           )}
+  
         </View>
       </View>
       <View style={{ alignItems: "center" }}>
@@ -223,6 +392,7 @@ class Arrived extends Component  {
       </View>
     </View>
   );
+          }
 }
 }
 const styles = StyleSheet.create({
@@ -249,8 +419,8 @@ container1: {
   marginBottom: 100,
 },
 btn: {
-  width: 200,
-  borderRadius: 40,
+  width: 300,
+  borderRadius: 30,
   backgroundColor: "rgba(237, 31, 36,0.9)",
   height: 45,
   justifyContent: "center",
@@ -259,6 +429,15 @@ blueBox: {
   flex: 1,
   borderRadius: 25,
   backgroundColor: "white",
+  justifyContent: "space-evenly",
+  marginTop: 10,
+  marginBottom: 10,
+  alignItems: "center",
+},
+blueBox1: {
+  flex: 1,
+  borderRadius: 25,
+  backgroundColor: "skyblue",
   justifyContent: "space-evenly",
   marginTop: 10,
   marginBottom: 10,

@@ -72,7 +72,7 @@ export default class Driver_Details extends Component{
       
       <KeyboardAvoidingView
       style={styles.container}
-      behavior="padding"
+      behavior={Platform.OS==="ios"?"padding":"height"}
       keyboardVerticalOffset={100}
     >
       <ScrollView>
@@ -104,6 +104,7 @@ export default class Driver_Details extends Component{
 
           <TextInput
             style={styles.input}
+            keyboardType="numeric"
             placeholder="Eg:9876543210"
             onChangeText={(mob_no) => this.setState({ mob_no })}
           />

@@ -22,7 +22,7 @@ export default class  App extends Component {
   render(){
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home" >
+      <Stack.Navigator initialRouteName="Home" keyboardHandlingEnabled="true" >
       <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Dashboard" component={DashBoardDrawer}

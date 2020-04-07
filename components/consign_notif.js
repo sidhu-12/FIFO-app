@@ -229,7 +229,7 @@ export default class Consign_Notif extends Component{
                   onPress={() => this.changeState(i)}
                 >
                   <Text
-                    style={{ textAlign: "center", color: "white", fontSize: 17, fontWeight: "700", }}
+                    style={{ textAlign: "center", color: "white", fontSize: 15, fontWeight: "700", }}
                   >
                     View Details
                   </Text>
@@ -239,7 +239,7 @@ export default class Consign_Notif extends Component{
                   onPress={() => this.acceptForm(i)}
                 >
                   <Text
-                    style={{ textAlign: "center", color: "white", fontSize: 17,fontWeight: "700", }}
+                    style={{ textAlign: "center", color: "white", fontSize: 15,fontWeight: "700", }}
                   >
                     Accept
                   </Text>
