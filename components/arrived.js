@@ -5,10 +5,11 @@ import {   Text,
   View,
   Button,
   ScrollView,
+  ActivityIndicator,
   Image,StyleSheet, Alert, Platform} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
-import Modal, { ModalFooter, ModalButton, ModalContent ,SlideAnimation} from 'react-native-modals';
+
 class Arrived extends Component  {
   constructor(props) {
     super(props);
@@ -19,6 +20,7 @@ class Arrived extends Component  {
       show:false,
       mode:'date',
       display:'default',
+      load:false
     };
     this.actualDate="";
     this.actualTime="";
@@ -26,16 +28,17 @@ class Arrived extends Component  {
   }
   
      onChange= async (event, selectedDate) => {
-
+       
+      this.setState({show:false})
        if(selectedDate!=undefined&&this.state.mode=='date')
        {
        
          console.log(selectedDate);
           this.setState({chosenDate:selectedDate});
           var date=new Date(this.state.chosenDate);
-          year = date.getFullYear();
-          month = date.getMonth()+1;
-               dt = date.getDate();
+          var year = date.getFullYear();
+           var month = date.getMonth()+1;
+               var dt = date.getDate();
    
               if (dt < 10) {
                  dt = '0' + dt;
@@ -123,6 +126,7 @@ class Arrived extends Component  {
         Alert.alert("Please enter the time or date");
       }
       else{
+        this.setState({load:true})
       var con={con_no:this.props.route.params.con_no,actualDate:this.actualDate,actualTime:this.actualTime};
       console.log(con);
       var xhr=new XMLHttpRequest;
@@ -135,16 +139,19 @@ class Arrived extends Component  {
            if(this.responseText=='done')
            {
                navigate();
-           
            }
-           
-         
          }
+         if(this.readyState==4&&this.status!=200)
+         {
+          Alert.alert("Network Error\nPlease check your network connection");
+         }
+         
        }
        xhr.open("POST","http://fifo-app-server.herokuapp.com/date",true);
        xhr.setRequestHeader("Content-type","application/json");
        xhr.send(JSON.stringify(con));
        const navigate=()=>{
+         this.setState({load:false})
          Alert.alert("Successfully updated");
         this.props.navigation.pop();
         this.props.navigation.pop();
@@ -280,6 +287,7 @@ class Arrived extends Component  {
               Update
             </Text>
           </TouchableOpacity>
+          <ActivityIndicator  size="large" color="skyblue" animating={this.state.load} hidesWhenStopped={true} />
         </View>
       </View>
     );
@@ -389,6 +397,7 @@ class Arrived extends Component  {
             Update
           </Text>
         </TouchableOpacity>
+        <ActivityIndicator  size="large" color="skyblue" animating={this.state.load} hidesWhenStopped={true} />
       </View>
     </View>
   );

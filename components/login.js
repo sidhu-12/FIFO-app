@@ -2,7 +2,7 @@ import 'react-native-gesture-handler';
 import DrawerLayout from 'react-native-gesture-handler/DrawerLayout';
 import React,{Component} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { Dimensions,ImageBackground,Keyboard,Platform,Alert,StyleSheet,StatusBar, Button,Text,TextInput, View ,TouchableOpacity,Image,KeyboardAvoidingView,TouchableWithoutFeedback} from 'react-native';
+import { Dimensions,ImageBackground,Keyboard,Platform,Alert,StyleSheet,StatusBar, Button,Text,TextInput, View ,TouchableOpacity,Image,KeyboardAvoidingView,TouchableWithoutFeedback,ActivityIndicator} from 'react-native';
 import {createStackNavigator, Assets} from '@react-navigation/stack';
 
 //import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -17,6 +17,7 @@ import {createStackNavigator, Assets} from '@react-navigation/stack';
         isPasswordVisible: true,  
         toggleText: 'Show', 
         keyboardOffset:0, 
+        load:false,
     }; 
   }
 
@@ -32,6 +33,7 @@ import {createStackNavigator, Assets} from '@react-navigation/stack';
   };  
   submitForm =()=>{ 
     Keyboard.dismiss();
+    this.setState({load:true})
     const {username,password}=this.state;
     if(this.state.username==''||this.state.password=='')
     {
@@ -50,8 +52,10 @@ import {createStackNavigator, Assets} from '@react-navigation/stack';
       {
         console.log(this.responseText);
         validate(this);
-        
-      
+      }
+      if(this.readyState==4&&this.status!=200)
+      {
+       Alert.alert("Network Error\nPlease check your network connection");
       }
     }
     xhr.open("POST","http://fifo-app-server.herokuapp.com/auth",true);
@@ -62,10 +66,12 @@ import {createStackNavigator, Assets} from '@react-navigation/stack';
       if(xml.responseText=="True")
         {
           Alert.alert("Login successful");
+          this.setState({load:false});
           this.props.navigation.navigate('Dashboard',{name:this.state.username});
           
         }
         else{
+          this.setState({load:false});
           Alert.alert("Login unsuccessful Please try again");
         }
     }
@@ -115,7 +121,8 @@ import {createStackNavigator, Assets} from '@react-navigation/stack';
             <Text style={{ color: "white", fontSize: 20, textAlign: "center" }}>
               Login
             </Text>
-          </TouchableOpacity>
+           </TouchableOpacity>
+           <ActivityIndicator  size="large" color="skyblue" animating={this.state.load} hidesWhenStopped={true} />
           
         </KeyboardAvoidingView>
       </View>

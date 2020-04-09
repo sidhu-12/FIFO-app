@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Modal, { ModalFooter, ModalButton, ModalContent ,SlideAnimation} from 'react-native-modals';
-import {  Image,FlatList,ScrollView, Alert,StyleSheet, Button,Text,TextInput, View ,TouchableOpacity,Switch,BackHandler} from 'react-native';
+import {  Image,FlatList,ScrollView, Alert,StyleSheet, Button,Text,TextInput, View ,TouchableOpacity,Switch,BackHandler,ActivityIndicator} from 'react-native';
 
 export default class History extends Component{
    constructor(props)
@@ -11,7 +11,8 @@ export default class History extends Component{
         key:-1,
         visible:false,
         div:[],
-        text:[]
+        text:[],
+        load:true
 
        };
        this.changeState=this.changeState.bind(this);
@@ -28,9 +29,11 @@ export default class History extends Component{
       {
         //console.log(this.responseText);
         create(this);
-        
-      
-      }
+     }
+     if(this.readyState==4&&this.status!=200)
+     {
+      Alert.alert("Network Error\nPlease check your network connection");
+     }
     }
     xhr.open("POST","http://fifo-app-server.herokuapp.com/history",true);
     xhr.setRequestHeader("Content-type","application/json");
@@ -39,7 +42,7 @@ export default class History extends Component{
     const create=(obj)=>{
       this.setState({op:JSON.parse(obj.responseText)[0]})
       this.setState({text:JSON.parse(obj.responseText)[1]})
-      console.log(this.state.text);
+      this.setState({load:false})
       //console.log(this.state.op);
     };
         }
@@ -111,7 +114,10 @@ export default class History extends Component{
               {
                 //console.log(this.responseText);
                 createDriver(this);
-     
+              }
+              if(this.readyState==4&&this.status!=200)
+              {
+               Alert.alert("Network Error\nPlease check your network connection");
               }
             }
             xhr.open("POST","http://fifo-app-server.herokuapp.com/driv",true);
@@ -281,7 +287,7 @@ export default class History extends Component{
                           </View>);}
          if(this.state.op.length==0)
          {
-             output.push(<View key={-1}><Text>No Request Available</Text></View>);
+             output.push(<View key={-1}><Text>No History Available</Text></View>);
          }
          return (
           <View style={styles.container}>
@@ -307,7 +313,9 @@ export default class History extends Component{
               showsVerticalScrollIndicator={false}
             >
               {output}
+              <ActivityIndicator  size="large" color="skyblue" animating={this.state.load} hidesWhenStopped={true} style={{alignSelf:"center"}}/>
             </ScrollView>
+            
             <View>
          <Text style={{textAlign:'right',fontSize:16}}>{this.state.text.footer}</Text>
             </View>

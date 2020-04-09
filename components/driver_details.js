@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {KeyboardAvoidingView, Dimensions,ScrollView,Platform, Picker,Alert,StyleSheet, Button,Text,TextInput, View ,TouchableOpacity,Switch,Image} from 'react-native';
+import {KeyboardAvoidingView, Dimensions,ScrollView,Platform, Picker,Alert,StyleSheet, Button,Text,TextInput, View ,TouchableOpacity,Switch,Image,ActivityIndicator} from 'react-native';
 
 export default class Driver_Details extends Component{
    constructor(props)
@@ -11,6 +11,7 @@ export default class Driver_Details extends Component{
            truck_no:'',
            round_trip:'N',
            container_no:this.props.route.params.con_no,
+           load:false
 
        }
    }
@@ -35,6 +36,7 @@ export default class Driver_Details extends Component{
         {
        //Alert.alert("Successfully done");
        //this.props.navigation.navigate('Dashboard');
+       this.setState({load:true})
        var xhr=new XMLHttpRequest;
        xhr.onreadystatechange=function()
        {
@@ -49,7 +51,12 @@ export default class Driver_Details extends Component{
            
            }
            
+           
          
+         }
+         if(this.readyState==4&&this.status!=200)
+         {
+          Alert.alert("Network Error\nPlease check your network connection");
          }
        }
        xhr.open("POST","http://fifo-app-server.herokuapp.com/driver_details",true);
@@ -57,6 +64,7 @@ export default class Driver_Details extends Component{
        //console.log(name);
        xhr.send(JSON.stringify(this.state));
        const navigate=()=>{
+         this.setState({load:false});
         Alert.alert("Successfully done");
        this.props.navigation.pop();
        this.props.navigation.pop();
@@ -162,6 +170,7 @@ export default class Driver_Details extends Component{
               Submit
             </Text>
           </TouchableOpacity>
+          <ActivityIndicator  size="large" color="skyblue" animating={this.state.load} hidesWhenStopped={true} />
         </View>
       </ScrollView>
     </KeyboardAvoidingView>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Modal, { ModalFooter, ModalButton, ModalContent ,SlideAnimation} from 'react-native-modals';
-import {  Image,FlatList,ScrollView, Alert,StyleSheet, Button,Text,TextInput, View ,TouchableOpacity,Switch,BackHandler} from 'react-native';
+import {  ActivityIndicator,Image,FlatList,ScrollView, Alert,StyleSheet, Button,Text,TextInput, View ,TouchableOpacity,Switch,BackHandler} from 'react-native';
 import call from 'react-native-phone-call';
 export default class Confirmed_Req extends Component{
    constructor(props)
@@ -10,6 +10,7 @@ export default class Confirmed_Req extends Component{
          op:[],
          visible:false,
          driv:[],
+         load:true,
 
        }
        this.acceptForm=this.acceptForm.bind(this);
@@ -40,6 +41,7 @@ export default class Confirmed_Req extends Component{
   xhr.send(JSON.stringify(name));
   const create=(obj)=>{
     this.setState({op:JSON.parse(obj.responseText)})
+    this.setState({load:false})
     //console.log(this.state.op);
   };
     
@@ -194,7 +196,7 @@ call(args).catch(console.error)
          output.push(   <View
           style={{
             flexDirection: "row",
-            backgroundColor: "skyblue",
+            backgroundColor: "lightgrey",
             borderRadius: 10,
             padding: 5,
             marginTop: 5,
@@ -229,7 +231,7 @@ call(args).catch(console.error)
               flexDirection: "column",
               justifyContent: "space-around",
               marginLeft: "auto",
-              backgroundColor: "skyblue",
+              backgroundColor: "lightgrey",
               borderRadius: 10,
               alignItems: "center",
               margin: 5,
@@ -293,7 +295,7 @@ call(args).catch(console.error)
                        }
                         if(this.state.op.length==0)
                         {
-                            output.push(<View key={-1}><Text>No Request Available</Text></View>);
+                            output.push(<View key={-1}><Text>No  Confirmed Request Available</Text></View>);
                         }
                       
     
@@ -318,6 +320,7 @@ call(args).catch(console.error)
           showsVerticalScrollIndicator={false}
         >
           {output}
+          <ActivityIndicator  size="large" color="skyblue" animating={this.state.load} hidesWhenStopped={true} style={{alignSelf:"center"}}/>
         </ScrollView>
       </View>
     );
