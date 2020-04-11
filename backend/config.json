@@ -1,10 +1,9 @@
 {"connection":
     {
-        "host": "sql12.freemysqlhosting.net",
-        "user": "sql12330885",
-        "password": "dygbQmaw2b",
-        "database": "sql12330885",
-        "port":3306
+        "host": "remotemysql.com",
+        "user": "5Mz7BOPEie",
+        "password": "OtfO1FEPpj",
+        "database": "5Mz7BOPEie"
 },
 "testing":
     {

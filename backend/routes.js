@@ -25,37 +25,9 @@ app.post("/conf", function(req, res) {
   });
 });
 app.get("/abc", function(req, res) {
-  con.query(`Call notification_req(?)`,['muthu'] ,function(error, results) {
+  con.query(`SELECT * FROM import_req where username='${req.body.username}' and accepted=1 and arrival_date is null` ,function(error, results) {
     if (error) throw error;
     res.send(results);
-    async function main() {
-    let testAccount = await nodemailer.createTestAccount();
-    let transporter = nodemailer.createTransport({
-      service: "gmail",
-      sendMail:true,
-      secure: false, // true for 465, false for other ports
-      auth: {
-        user:"sidharth12899@gmail.com",
-        pass:"carpediem_4321" 
-      }
-    });
-   
-var mailOptions = {
-  from: 'sidharth12899@gmail.com',
-  to: 'sidharth12899@yahoo.com',
-  subject: 'Sending Email using Node.js',
-  text: 'That was easy!'
-};
-
-transporter.sendMail(mailOptions, function(error, info){
-  if (error) {
-    console.log(error);
-  } else {
-    console.log('Email sent: ' + info.response);
-  }});
-  
-  }
-  main().catch(console.error);
   })});
 
 
