@@ -23,14 +23,17 @@ export default class Driver_Details extends Component{
         if(!name_pattern.test(this.state.name))
         {
             Alert.alert("Please Fill the appropriate Name");
+            this.setState({load:false});
         }else
         if(this.state.mob_no==''||!num_pattern.test(this.state.mob_no))
         {
             Alert.alert("Please Fill the Correct Mobile Number");
+            this.setState({load:false});
         }else
         if(this.state.truck_no==''||!truck_pattern.test(this.state.truck_no))
         {
             Alert.alert("Please Fill the Correct Truck Number");
+            this.setState({load:false});
         }
         else
         {
@@ -57,12 +60,17 @@ export default class Driver_Details extends Component{
          if(this.readyState==4&&this.status!=200)
          {
           Alert.alert("Network Error\nPlease check your network connection");
+          stopLoading();
          }
        }
        xhr.open("POST","http://fifo-app-server.herokuapp.com/driver_details",true);
        xhr.setRequestHeader("Content-type","application/json");
        //console.log(name);
        xhr.send(JSON.stringify(this.state));
+       const stopLoading=()=>
+       {
+        this.setState({load:false})
+       }
        const navigate=()=>{
          this.setState({load:false});
         Alert.alert("Successfully done");

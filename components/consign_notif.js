@@ -68,6 +68,7 @@ export default class Consign_Notif extends Component{
       if(this.readyState==4&&this.status!=200)
       {
        Alert.alert("Network Error\nPlease check your network connection");
+       stopLoading();
       }
       
     }
@@ -75,6 +76,10 @@ export default class Consign_Notif extends Component{
     xhr.setRequestHeader("Content-type","application/json");
     //console.log(name);
     xhr.send(JSON.stringify(name));
+    const stopLoading=()=>
+    {
+      this.setState({load:false})
+    }
     const create=(obj)=>{
       this.setState({op:JSON.parse(obj.responseText)});
       this.setState({load:false});

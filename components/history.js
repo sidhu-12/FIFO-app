@@ -33,12 +33,17 @@ export default class History extends Component{
      if(this.readyState==4&&this.status!=200)
      {
       Alert.alert("Network Error\nPlease check your network connection");
+      stopLoading();
      }
     }
     xhr.open("POST","http://fifo-app-server.herokuapp.com/history",true);
     xhr.setRequestHeader("Content-type","application/json");
     //console.log(name);
     xhr.send(JSON.stringify(name));
+    const stopLoading=()=>
+    {
+      this.setState({load:false});
+    }
     const create=(obj)=>{
       this.setState({op:JSON.parse(obj.responseText)[0]})
       this.setState({text:JSON.parse(obj.responseText)[1]})
@@ -118,13 +123,18 @@ export default class History extends Component{
               if(this.readyState==4&&this.status!=200)
               {
                Alert.alert("Network Error\nPlease check your network connection");
+               stopLoading();
               }
             }
             xhr.open("POST","http://fifo-app-server.herokuapp.com/driv",true);
             xhr.setRequestHeader("Content-type","application/json");
             //console.log(name);
-          
+            
             xhr.send(JSON.stringify(con_no));
+            const stopLoading=()=>
+            {
+              this.setState({load:false});
+            }
             const createDriver=(xml)=>
             {
               //console.log(xml.responseText);

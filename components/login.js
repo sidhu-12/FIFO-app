@@ -38,6 +38,7 @@ import {createStackNavigator, Assets} from '@react-navigation/stack';
     if(this.state.username==''||this.state.password=='')
     {
       Alert.alert("Please enter the username or password");
+      this.setState({load:false})
     }else
     {
     var auth = {
@@ -56,11 +57,16 @@ import {createStackNavigator, Assets} from '@react-navigation/stack';
       if(this.readyState==4&&this.status!=200)
       {
        Alert.alert("Network Error\nPlease check your network connection");
+       stopLoading();
       }
     }
     xhr.open("POST","http://fifo-app-server.herokuapp.com/auth",true);
     xhr.setRequestHeader("Content-type","application/json");
     xhr.send(JSON.stringify(auth));
+    const stopLoading=()=>
+    {
+      this.setState({load:false});
+    }
     const validate=(xml)=>
     {
       if(xml.responseText=="True")

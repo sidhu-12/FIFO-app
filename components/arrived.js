@@ -124,6 +124,7 @@ class Arrived extends Component  {
       if(this.actualDate==''||this.actualTime=='')
       {
         Alert.alert("Please enter the time or date");
+        this.setState({load:false});
       }
       else{
         this.setState({load:true})
@@ -144,12 +145,17 @@ class Arrived extends Component  {
          if(this.readyState==4&&this.status!=200)
          {
           Alert.alert("Network Error\nPlease check your network connection");
+          stopLoading();
          }
          
        }
        xhr.open("POST","http://fifo-app-server.herokuapp.com/date",true);
        xhr.setRequestHeader("Content-type","application/json");
        xhr.send(JSON.stringify(con));
+       const stopLoading=()=>
+       {
+        this.setState({load:false})
+       }
        const navigate=()=>{
          this.setState({load:false})
          Alert.alert("Successfully updated");

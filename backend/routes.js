@@ -17,7 +17,7 @@ con.connect(function(error) {
   else console.log("connected");
 });
 app.post("/conf", function(req, res) {
-  con.query(`SELECT * FROM import_req where username='${req.body.username}' and accepted=1 and arrival_date is null`, function(error, results) {
+  con.query(`SELECT * FROM import_req where username='muthu' and accepted=1 and arrival_date is null`, function(error, results) {
     //con.query(`Call conf_req(?)`,[req.body.username], function(error, results) {
   if (error) throw error;
     //console.log(results);
