@@ -6,7 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import History from './history.js';
 import Login from './login.js';
 const Drawer=createDrawerNavigator();
-var name,prop,prop1;
+var name,prop,prop1,tp_name;
 function CustomDrawerContent(props) {
   return (
     <DrawerContentScrollView>
@@ -19,16 +19,16 @@ function CustomDrawerContent(props) {
               marginTop:5
             }}/>
          <DrawerItem
-        label={name}
+        label={tp_name}
         style={{alignSelf:'flex-end',}}
         labelStyle={{fontWeight:'bold',fontSize:20}}
-        onPress={()=>prop.navigation.navigate("Dashboard", { uname: name })
+        onPress={()=>{prop.navigation.navigate("Dashboard", { id: name,name:tp_name });prop1.navigation.toggleDrawer()}
       }
       />
       </View>
       <DrawerItem
         label="History"
-        onPress={()=>prop.navigation.navigate("History", { uname: name })
+        onPress={()=>{prop.navigation.navigate("History", { uname: name });prop1.navigation.toggleDrawer()}
       }
       />
        <DrawerItem
@@ -45,7 +45,8 @@ function CustomDrawerContent(props) {
   );
 }
 const DashboardDrawer=(props)=>{
-   name=props.route.params.name;
+   name=props.route.params.id;
+   tp_name=props.route.params.name;
     prop=props;
     props.navigation.setOptions({
       headerLeft:()=>(
@@ -97,7 +98,7 @@ prop1=props;
         </View>
       </View>
           <Text style={{ fontSize: 25, textAlign: "center" }}>
-            Welcome {name} !
+            Welcome {tp_name} !
           </Text>
           <ScrollView contentContainerStyle={{ flexGrow: 1, alignItems: "center" }}>
           <TouchableOpacity

@@ -11,6 +11,8 @@ export default class Driver_Details extends Component{
            truck_no:'',
            round_trip:'N',
            container_no:this.props.route.params.con_no,
+           bl_no:this.props.route.params.bl_no,
+           username:this.props.route.params.uname,
            load:false
 
        }
@@ -63,7 +65,7 @@ export default class Driver_Details extends Component{
           stopLoading();
          }
        }
-       xhr.open("POST","http://fifo-app-server.herokuapp.com/driver_details",true);
+       xhr.open("POST","http://192.168.0.102:3000/driver_details",true);
        xhr.setRequestHeader("Content-type","application/json");
        //console.log(name);
        xhr.send(JSON.stringify(this.state));

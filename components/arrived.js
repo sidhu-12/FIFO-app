@@ -128,7 +128,16 @@ class Arrived extends Component  {
       }
       else{
         this.setState({load:true})
-      var con={con_no:this.props.route.params.con_no,actualDate:this.actualDate,actualTime:this.actualTime};
+      var con={username:this.props.route.params.uname,
+        con_no:this.props.route.params.con_no,
+        actualDate:this.actualDate,
+        actualTime:this.actualTime,
+        bl_no:this.props.route.params.bl_no,
+        consignee_name:this.props.route.params.consignee_name,
+        consignee_mail:this.props.route.params.consignee_mail,
+        consignee_mobile:this.props.route.params.consignee_mobile,
+        driver_name:this.props.route.params.driver_name,
+        mob_number:this.props.route.params.mob_number};
       console.log(con);
       var xhr=new XMLHttpRequest;
        xhr.onreadystatechange=function()
@@ -149,7 +158,7 @@ class Arrived extends Component  {
          }
          
        }
-       xhr.open("POST","http://fifo-app-server.herokuapp.com/date",true);
+       xhr.open("POST","http://192.168.0.101:3000/date_consignee",true);
        xhr.setRequestHeader("Content-type","application/json");
        xhr.send(JSON.stringify(con));
        const stopLoading=()=>
@@ -161,7 +170,7 @@ class Arrived extends Component  {
          Alert.alert("Successfully updated");
         this.props.navigation.pop();
         this.props.navigation.pop();
-        this.props.navigation.navigate("Dashboard",{uname:this.props.route.params.uname});
+        //this.props.navigation.navigate("",{uname:this.props.route.params.uname});
        }
       }
 

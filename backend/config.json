@@ -3,7 +3,17 @@
         "host": "remotemysql.com",
         "user": "5Mz7BOPEie",
         "password": "OtfO1FEPpj",
-        "database": "5Mz7BOPEie"
+        "database": "5Mz7BOPEie",
+        "multipleStatements": true
+
+},
+"db_con":{
+    "host": "107.180.78.61",
+    "user": "mobileapp",
+    "password": "Mob@App@321",
+    "database": "trail",
+    "multipleStatements": true
+
 },
 "testing":
     {
@@ -13,8 +23,13 @@
         "database": "transporter",
         "port":8889
 },
+"mail":{
+    "user":"sidharth12899@gmail.com",
+    "pass":"carpediem_4321"
+},
 "contact":{
 "header":"Completed transaction for past 30 days"    ,
-"footer":"For additional information \n contact FIFO support:..."
-}
+"footer":"For additional information \n contact FIFO support:..."},
+"key":"MobApp@321"
+
 }

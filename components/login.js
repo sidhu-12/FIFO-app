@@ -51,16 +51,17 @@ import {createStackNavigator, Assets} from '@react-navigation/stack';
       console.log(this.readyState);
       if(this.readyState==4&&this.status==200)
       {
-        console.log(this.responseText);
+        //console.log(this.responseText);
         validate(this);
       }
       if(this.readyState==4&&this.status!=200)
       {
        Alert.alert("Network Error\nPlease check your network connection");
+       //console.log(this.responseText);
        stopLoading();
       }
     }
-    xhr.open("POST","http://fifo-app-server.herokuapp.com/auth",true);
+    xhr.open("POST","http://192.168.0.102:3000/auth",true);
     xhr.setRequestHeader("Content-type","application/json");
     xhr.send(JSON.stringify(auth));
     const stopLoading=()=>
@@ -69,16 +70,19 @@ import {createStackNavigator, Assets} from '@react-navigation/stack';
     }
     const validate=(xml)=>
     {
-      if(xml.responseText=="True")
+      var res=JSON.parse(xml.responseText);
+      console.log(res[res.length-1]);
+      if(res[res.length-1][0].status=="LOGIN SUCCESSFULL")
         {
-          Alert.alert("Login successful");
+          Alert.alert(res[res.length-1][0].status);
           this.setState({load:false});
-          this.props.navigation.navigate('Dashboard',{name:this.state.username});
+          //this.props.navigation.pop();
+          this.props.navigation.navigate('Dashboard',{id:res[res.length-1][0].uname,name:res[res.length-1][0].name});
           
         }
         else{
           this.setState({load:false});
-          Alert.alert("Login unsuccessful Please try again");
+          Alert.alert(res[res.length-1][0].status+"\nPlease try again");
         }
     }
   }

@@ -20,7 +20,7 @@ export default class Consign_Notif extends Component{
    }
     acceptForm=(i)=>{
        Alert.alert("Please Update the Driver Details for \n Container Number:"+this.state.op[i].container_no);
-       this.props.navigation.navigate('Update Driver Details',{con_no:this.state.op[i].container_no,uname:this.props.route.params.uname});
+       this.props.navigation.navigate('Update Driver Details',{con_no:this.state.op[i].container_no,uname:this.props.route.params.uname,bl_no:this.state.op[i].bl_no});
        
        }
    /*rejectForm=(i)=>{
@@ -68,11 +68,12 @@ export default class Consign_Notif extends Component{
       if(this.readyState==4&&this.status!=200)
       {
        Alert.alert("Network Error\nPlease check your network connection");
+       console.log(this.responseText);
        stopLoading();
       }
       
     }
-    xhr.open("POST","http://fifo-app-server.herokuapp.com/req",true);
+    xhr.open("POST","http://192.168.0.102:3000/req",true);
     xhr.setRequestHeader("Content-type","application/json");
     //console.log(name);
     xhr.send(JSON.stringify(name));
@@ -96,9 +97,9 @@ export default class Consign_Notif extends Component{
      //BackHandler.removeEventListener('hardwareBackPress', onBackPress);
         this.setState({visible:true});
         var date=new Date(this.state.op[i].delivery_date);
-        year = date.getFullYear();
-     month = date.getMonth()+1;
-          dt = date.getDate();
+       var year = date.getFullYear();
+      var month = date.getMonth()+1;
+          var dt = date.getDate();
 
          if (dt < 10) {
             dt = '0' + dt;
@@ -107,6 +108,19 @@ export default class Consign_Notif extends Component{
             month = '0' + month;
             }
          var del_date=dt+"-"+month+"-"+year;
+         var date=new Date(this.state.op[i].dop_cfs);
+         console.log(this.state.op[i].dop_cfs);
+        var year = date.getFullYear();
+     var month = date.getMonth()+1;
+         var  dt = date.getDate();
+
+         if (dt < 10) {
+            dt = '0' + dt;
+            }
+            if (month < 10) {
+            month = '0' + month;
+            }
+         var dop_cfs=dt+"-"+month+"-"+year;
             //console.log(del_date);
             const addZero=(i)=>{
                  {
@@ -121,8 +135,6 @@ export default class Consign_Notif extends Component{
             var year1 = date1.getFullYear();
            var month1 = date1.getMonth()+1;
           var dt1 = date1.getDate();
-          var hrs1=addZero(date1.getHours());
-          var mins1=addZero(date1.getMinutes());
 
          if (dt1 < 10) {
             dt1 = '0' + dt1;
@@ -131,16 +143,18 @@ export default class Consign_Notif extends Component{
             month1 = '0' + month1;
             }
             var dop=+dt1+"-"+month1+"-"+year1;
-            var time=hrs1+":"+mins1;
-            console.log(this.state.op[i].dop);
+            //console.log(this.state.op[i].dop);
         this.content=<View key={j}><Text style={{fontSize:20}}>Consignee Name:{this.state.op[i].conginee_name}</Text>
           <Text style={{fontSize:20}}>Container No:{this.state.op[i].container_no}</Text>
+          <Text style={{fontSize:20}}>BL No:{this.state.op[i].bl_no}</Text>
           <Text style={{fontSize:20}}>Container Type:{this.state.op[i].container_type}</Text>
           <Text style={{fontSize:20}}>Container Size:{this.state.op[i].container_size}</Text>
           <Text style={{fontSize:20}}>Date of Pickup:{dop}</Text>
-          <Text style={{fontSize:20}}>Time of Pickup:{time}</Text>
+          <Text style={{fontSize:20}}>Date of Pickup from CFS:{dop_cfs}</Text>
           <Text style={{fontSize:20}}>Port Name:{this.state.op[i].port_name}</Text>
           <Text style={{fontSize:20}}>Delivery Date:{del_date}</Text>
+          <Text style={{fontSize:20}}>Delivery Time:{this.state.op[i].time}</Text>
+          <Text style={{fontSize:20}}>Delivery Place:{this.state.op[i].delivery_place}</Text>
           </View>
         ;
             j--;
@@ -179,9 +193,10 @@ export default class Consign_Notif extends Component{
                 var year1 = date1.getFullYear();
                var month1 = date1.getMonth()+1;
               var dt1 = date1.getDate();
-              var hrs1=addZero(date1.getHours());
-              var mins1=addZero(date1.getMinutes());
-
+              var time=new Date(this.state.op[i].time);
+              var hrs1=addZero(time.getHours());
+              var mins1=addZero(time.getMinutes());
+              //console.log(time);
              if (dt1 < 10) {
                 dt1 = '0' + dt1;
                 }
@@ -190,8 +205,8 @@ export default class Consign_Notif extends Component{
                 }
                 var dop=+dt1+"-"+month1+"-"+year1;
                 var time=hrs1+":"+mins1;
-                console.log(dop+time);
-                console.log(this.state.op[i].dop);
+                //console.log(dop+time);
+                 //console.log(this.state.op[i].dop);
                 //console.log(this.state.op[i].delivery_date);  
             output.push(  <View
               style={{
@@ -204,6 +219,9 @@ export default class Consign_Notif extends Component{
               key={i}
             >
               <View style={{ justifyContent: "flex-start" }}>
+              <Text style={{ fontSize: 16 }}>
+                {"BL No.               :"} {this.state.op[i].bl_no}
+                </Text>
                 <Text style={{ fontSize: 16 }}>
                 {"Container No.   :"} {this.state.op[i].container_no}
                 </Text>
@@ -215,9 +233,6 @@ export default class Consign_Notif extends Component{
                 </Text>
                 <Text style={{ fontSize: 16 }}>
               {"Date of Pickup  :"} {dop}
-            </Text>
-            <Text style={{ fontSize: 16 }}>
-              {"Time of Pickup :"} {time}
             </Text>
               </View>
               <View

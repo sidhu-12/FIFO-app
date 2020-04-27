@@ -9,15 +9,14 @@ export default class Confirmed_Req extends Component{
        this.state={
          op:[],
          visible:false,
-         driv:[],
          load:true,
 
        }
        this.acceptForm=this.acceptForm.bind(this);
    }
     acceptForm=(i)=>{
-       Alert.alert(" Please enter the arrival date and time");
-       this.props.navigation.navigate('Update Arrival Time and Date',{con_no:this.state.op[i].container_no,uname:this.props.route.params.uname});
+       Alert.alert(" Please enter the arrival date and time\n for container number: "+this.state.op[i].container_no);
+       this.props.navigation.navigate('Update Arrival Time and Date',{con_no:this.state.op[i].container_no,uname:this.props.route.params.uname,bl_no:this.state.op[i].bl_no,consignee_name:this.state.op[i].conginee_name,consignee_mail:this.state.op[i].consignee_mail,consignee_mobile:this.state.op[i].consignee_mobile,driver_name:this.state.op[i].driver_name,mob_number:this.state.op[i].mob_number});
     }
    
     createList=()=>{
@@ -26,10 +25,10 @@ export default class Confirmed_Req extends Component{
     var xhr=new XMLHttpRequest;
   xhr.onreadystatechange=function()
   {
-    //console.log(this.readyState);
+    console.log(this.readyState);
     if(this.readyState==4&&this.status==200)
     {
-      //console.log(this.responseText);
+      console.log(this.responseText);
       create(this);
     
     }
@@ -39,7 +38,7 @@ export default class Confirmed_Req extends Component{
      stopLoading();
     }
   }
-  xhr.open("POST","http://fifo-app-server.herokuapp.com/conf",true);
+  xhr.open("POST","http://192.168.0.102:3000/conf",true);
   xhr.setRequestHeader("Content-type","application/json");
   //console.log(name);
   xhr.send(JSON.stringify(name));
@@ -64,9 +63,9 @@ export default class Confirmed_Req extends Component{
   var j=-2;
      //this.setState({visible:true});
      var date=new Date(this.state.op[i].delivery_date);
-     year = date.getFullYear();
-  month = date.getMonth()+1;
-       dt = date.getDate();
+    var  year = date.getFullYear();
+  var month = date.getMonth()+1;
+      var  dt = date.getDate();
 
       if (dt < 10) {
          dt = '0' + dt;
@@ -76,21 +75,24 @@ export default class Confirmed_Req extends Component{
          }
       var del_date=dt+"-"+month+"-"+year;
          //console.log(del_date);
-         const addZero=(i)=>{
-              {
-                 if (i < 10) {
-                   i = "0" + i;
-                 }
-                 return i;
-               }
-               
-         }
+         var date=new Date(this.state.op[i].dop_cfs);
+         console.log(this.state.op[i].dop_cfs);
+        var year = date.getFullYear();
+     var month = date.getMonth()+1;
+         var  dt = date.getDate();
+
+         if (dt < 10) {
+            dt = '0' + dt;
+            }
+            if (month < 10) {
+            month = '0' + month;
+            }
+         var dop_cfs=dt+"-"+month+"-"+year;
+         
          var date1=new Date(this.state.op[i].dop);
          var year1 = date1.getFullYear();
         var month1 = date1.getMonth()+1;
-       var dt1 = date1.getDate();
-       var hrs1=addZero(date1.getHours());
-       var mins1=addZero(date1.getMinutes());
+        var dt1=date1.getDate();
 
       if (dt1 < 10) {
          dt1 = '0' + dt1;
@@ -99,60 +101,24 @@ export default class Confirmed_Req extends Component{
          month1 = '0' + month1;
          }
          var dop=+dt1+"-"+month1+"-"+year1;
-              var time=hrs1+":"+mins1;
-         //console.log(this.state.op[i].dop);
-           var con_no={container_no:this.state.op[i].container_no};
-         var xhr=new XMLHttpRequest;
-       
-       xhr.onreadystatechange=function()
-       {
-         //console.log(this.readyState);
-         if(this.readyState==4&&this.status==200)
-         {
-           //console.log(this.responseText);
-           createDriver(this);
-         }
-         if(this.readyState==4&&this.status!=200)
-         {
-          Alert.alert("Network Error\nPlease check your network connection");
-          stopLoading();
-         }
-       }
-       xhr.open("POST","http://fifo-app-server.herokuapp.com/driv",true);
-       xhr.setRequestHeader("Content-type","application/json");
-       //console.log(name);
-     
-       xhr.send(JSON.stringify(con_no));
-       const stopLoading=()=>
-       {
-        this.setState({load:false})
-       }
-       const createDriver=(xml)=>
-       {
-         //console.log(xml.responseText);
-         this.setState({driv:JSON.parse(xml.responseText)});
-         createContent();
-        // console.log(this.state.driv);
-       }
-       
-       
-       const createContent =()=>{
         
        // console.log(this.state.driv);
-        this.mob_no=this.state.driv[0].mobile_number;
+        this.mob_no=this.state.op[i].mob_number;
      this.content=<View key={j}><Text style={{fontSize:20}}>Consignee Name:{this.state.op[i].conginee_name}</Text>
-       <Text style={{fontSize:20}}>Container No:{this.state.op[i].container_no}</Text>
-       <Text style={{fontSize:20}}>Container Type:{this.state.op[i].container_type}</Text>
-       <Text style={{fontSize:20}}>Container Size:{this.state.op[i].container_size}</Text>
-       <Text style={{fontSize:20}}>Date of Pickup:{dop}</Text>
-       <Text style={{fontSize:20}}>Time of Pickup:{time}</Text>
-       <Text style={{fontSize:20}}>Port Name:{this.state.op[i].port_name}</Text>
-       <Text style={{fontSize:20}}>Delivery Date:{del_date}</Text>
-       <Text style={{fontSize:20}}>Driver Name:{this.state.driv[0].driver_name}</Text>
-       <Text style={{fontSize:20}}>Mobile Number:{this.state.driv[0].mobile_number}</Text>
- 
-       </View>
-     ;
+     <Text style={{fontSize:20}}>Container No:{this.state.op[i].container_no}</Text>
+     <Text style={{fontSize:20}}>BL No:{this.state.op[i].bl_no}</Text>
+     <Text style={{fontSize:20}}>Container Type:{this.state.op[i].container_type}</Text>
+     <Text style={{fontSize:20}}>Container Size:{this.state.op[i].container_size}</Text>
+     <Text style={{fontSize:20}}>Date of Pickup:{dop}</Text>
+     <Text style={{fontSize:20}}>Date of Pickup from CFS:{dop_cfs}</Text>
+     <Text style={{fontSize:20}}>Port Name:{this.state.op[i].port_name}</Text>
+     <Text style={{fontSize:20}}>Delivery Date:{del_date}</Text>
+     <Text style={{fontSize:20}}>Delivery Time:{this.state.op[i].time}</Text>
+     <Text style={{fontSize:20}}>Delivery Place:{this.state.op[i].delivery_place}</Text>
+     <Text style={{fontSize:20}}>Driver Name:{this.state.op[i].driver_name}</Text>
+     <Text style={{fontSize:20}}>Mobile Number:{this.state.op[i].mob_number}</Text>
+     <Text style={{fontSize:20}}>Truck Number:{this.state.op[i].truck_number}</Text>
+     </View>;
          j--;
          this.setState({visible:true});
          const onBackPress = () => {
@@ -165,7 +131,7 @@ export default class Confirmed_Req extends Component{
         };
         BackHandler.addEventListener('hardwareBackPress', onBackPress);
          
-       }  
+         
 }
 callDriver=()=>
 { 
@@ -220,6 +186,9 @@ call(args).catch(console.error)
           key={i}
         >
           <View style={{ justifyContent: "flex-start" }}>
+          <Text style={{ fontSize: 16 }}>
+                {"BL No.               :"} {this.state.op[i].bl_no}
+                </Text>
             <Text style={{ fontSize: 16 }}>
               {"Container No.   : "}
               {this.state.op[i].container_no}
@@ -235,10 +204,6 @@ call(args).catch(console.error)
             <Text style={{ fontSize: 16 }}>
               {"Date of Pickup  : "}
               {dop}
-            </Text>
-            <Text style={{ fontSize: 16 }}>
-              {"Time of Pickup : "}
-              {time}
             </Text>
           </View>
           <View
