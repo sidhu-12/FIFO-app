@@ -5,7 +5,7 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "server": "cd backend && node routes.js && cd .. && npm start",
+    "server": "cd backend && node back_server.js",
     "eject": "expo eject",
     "dev": "concurrently --kill-others \"npm run server\" \"npm run start\"",
     "safety": "expo install react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view"
