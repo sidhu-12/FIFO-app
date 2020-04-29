@@ -39,6 +39,7 @@ export default class Confirmed_Req extends Component{
     }
   }
   xhr.open("POST","https://fifo-app-server.herokuapp.com/conf",true);
+  //xhr.open("POST","http://192.168.0.101/conf",true);
   xhr.setRequestHeader("Content-type","application/json");
   //console.log(name);
   xhr.send(JSON.stringify(name));

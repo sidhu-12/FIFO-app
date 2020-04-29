@@ -57,11 +57,12 @@ import {createStackNavigator, Assets} from '@react-navigation/stack';
       if(this.readyState==4&&this.status!=200)
       {
        Alert.alert("Network Error\nPlease check your network connection");
-       //console.log(this.responseText);
+       console.log(this.responseText);
        stopLoading();
       }
     }
     xhr.open("POST","https://fifo-app-server.herokuapp.com/auth",true);
+    //xhr.open("POST","http://192.168.0.101/auth",true);
     xhr.setRequestHeader("Content-type","application/json");
     xhr.send(JSON.stringify(auth));
     const stopLoading=()=>

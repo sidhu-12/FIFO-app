@@ -159,6 +159,9 @@ class Arrived extends Component  {
          
        }
        xhr.open("POST","https://fifo-app-server.herokuapp.com/date_consignee",true);
+       //xhr.open("POST","http://192.168.0.101/date_consignee",true);
+
+
        xhr.setRequestHeader("Content-type","application/json");
        xhr.send(JSON.stringify(con));
        const stopLoading=()=>
