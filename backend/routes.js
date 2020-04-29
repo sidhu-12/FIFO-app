@@ -8,6 +8,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const config=require("./config.json");
 const con=mysql.createConnection(config.connection);
 const nodemailer=require("nodemailer");
+const request=require("request");
 app.listen(process.env.PORT||3000, () => {
   console.log("Listening on localhost:3000");
 });
@@ -16,6 +17,7 @@ con.connect(function(error) {
   if (error) console.log(error);
   else console.log("connected");
 });
+
 app.post("/conf", function(req, res) {
   con.query(`SELECT * FROM import_req where username='${req.body.username}' and accepted=1 and arrival_date is null`, function(error, results) {
     //con.query(`Call conf_req(?)`,[req.body.username], function(error, results) {
@@ -25,7 +27,7 @@ app.post("/conf", function(req, res) {
   });
 });
 app.get("/abc", function(req, res) {
-  let transporter = nodemailer.createTransport({
+ /* let transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,
     secure: true,
@@ -48,6 +50,9 @@ transporter.sendMail(mailOptions, (error, info) => {
         return console.log(error);
     }
     console.log('Message %s sent: %s', info.messageId, info.response);
+    });*/
+    request("http://www.smsintegra.com/api/smsapi.aspx?uid=FIFOFUTURE&pwd=18105&mobile=9626930040&msg=We are pleased to confirm arrival of the container No: ABC1234568 at your factory.Contact truck Driver Name and Mobile No:(Ram and 9498057498)&sid=Smsint&type=0&dtNow=dateandtime",function(error,response,body){
+      console.log(body);
     });
   });
 

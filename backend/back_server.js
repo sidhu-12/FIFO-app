@@ -8,6 +8,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const config=require("./config.json");
 const con=mysql.createConnection(config.db_con);
 const nodemailer=require("nodemailer");
+const request=require("request");
 app.listen(process.env.PORT||3000, () => {
   console.log("Listening on localhost:3000");
 });
@@ -104,8 +105,10 @@ transporter.sendMail(mailOptions, (error, info) => {
     }
     console.log('Message %s sent: %s', info.messageId, info.response);
     });
-
-});
+    request("http://www.smsintegra.com/api/smsapi.aspx?uid=FIFOFUTURE&pwd=18105&mobile=9626930040&msg=Dear "+req.body.shipper_name+" We are pleased to confirm arrival of the Container No:"+req.body.con_no+" at your factory.Contact truck Driver Name and Mobile No:( "+req.body.driver_name+" and "+req.body.mob_number+" )&sid=Smsint&type=0&dtNow=dateandtime",function(error,response,body){
+      console.log(body);
+    });
+  });
 app.post("/date_consignee", function(req, res) {
   //const sql = `update import_req set arrival_date='${req.body.actualDate}' , arrival_time='${req.body.actualTime}' where container_no='${req.body.con_no}'`;
   //console.log(sql);
@@ -139,7 +142,9 @@ transporter.sendMail(mailOptions, (error, info) => {
     }
     console.log('Message %s sent: %s', info.messageId, info.response);
     });
-
+    request("http://www.smsintegra.com/api/smsapi.aspx?uid=FIFOFUTURE&pwd=18105&mobile=9626930040&msg=Dear "+req.body.consignee_name+" We are pleased to confirm arrival of the Container No:"+req.body.con_no+" at your factory.Contact truck Driver Name and Mobile No:( "+req.body.driver_name+" and "+req.body.mob_number+" )&sid=Smsint&type=0&dtNow=dateandtime",function(error,response,body){
+      console.log(body);
+    });
 });
 app.post("/history", function(req, res) {
   //const sql = `Select *,DATEDIFF(CURRENT_DATE(),dop) as diff from import_req where DATEDIFF(CURRENT_DATE(),dop)<30 and username='${req.body.username}' and accepted=1 and arrival_date <>'0000-00-00'`;
