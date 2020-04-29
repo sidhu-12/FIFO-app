@@ -61,7 +61,7 @@ import {createStackNavigator, Assets} from '@react-navigation/stack';
        stopLoading();
       }
     }
-    xhr.open("POST","http://192.168.0.102:3000/auth",true);
+    xhr.open("POST","https://fifo-app-server.herokuapp.com/auth",true);
     xhr.setRequestHeader("Content-type","application/json");
     xhr.send(JSON.stringify(auth));
     const stopLoading=()=>
@@ -96,11 +96,9 @@ import {createStackNavigator, Assets} from '@react-navigation/stack';
             style={{ resizeMode: "stretch" }}
             source={require("./fifo.png")}
           />
-           <View style={{ flexDirection: "column" }}>
+           <View>
             <Text style={{ fontSize: 15 }}>
               Driven by <Text style={{ color: "#00c0e2" }}>Technology</Text> ,
-            </Text>
-            <Text style={{ fontSize: 15 }}>
               Defined By <Text style={{ color: "#00c0e2" }}>Humanity</Text>
             </Text>
           </View>
@@ -149,9 +147,10 @@ const styles = StyleSheet.create({
     padding: 10
   },
   imageContainer: {
-    flexDirection: "row",
-    justifyContent: "space-evenly",
-    alignItems: "center"
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 10
   },
   input: {
     width: WIDTH - 60,

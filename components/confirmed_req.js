@@ -38,7 +38,7 @@ export default class Confirmed_Req extends Component{
      stopLoading();
     }
   }
-  xhr.open("POST","http://192.168.0.102:3000/conf",true);
+  xhr.open("POST","https://fifo-app-server.herokuapp.com/conf",true);
   xhr.setRequestHeader("Content-type","application/json");
   //console.log(name);
   xhr.send(JSON.stringify(name));
@@ -287,11 +287,9 @@ call(args).catch(console.error)
             style={{ resizeMode: "stretch" }}
             source={require("./fifo.png")}
           />
-          <View style={{ flexDirection: "column" }}>
+          <View>
             <Text style={{ fontSize: 15 }}>
               Driven by <Text style={{ color: "#00c0e2" }}>Technology</Text> ,
-            </Text>
-            <Text style={{ fontSize: 15 }}>
               Defined By <Text style={{ color: "#00c0e2" }}>Humanity</Text>
             </Text>
           </View>
@@ -315,10 +313,10 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   imageContainer: {
-    flexDirection: "row",
-    justifyContent: "space-evenly",
+    flexDirection: "column",
+    justifyContent: "center",
     alignItems: "center",
-    padding: 5,
+   marginTop:10
   },
   btn1: {
     backgroundColor: "rgba(237, 31, 36,0.95)",

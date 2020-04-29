@@ -38,11 +38,11 @@ app.post("/auth", function(req, res) {
   //const sql=`Call authenticate(?,?)`;
   const sql = `set @O_STAT = 0;set @O_STATUS = '0';set @O_STAKEHOLDER_ID = 0;set @O_STAKEHOLDER_ROLE = 0;set @O_STAKEHOLDER_NAME = '0';set @O_STAKEHOLDER_ROLE_NAME = '0'; set @O_FIFOAPPROVALFLAG = '0'; call SP_FIFO_AGENT_LOGIN('${req.body.username}', '${req.body.password}', '${config.key}', 'C', @O_STAT, @O_STATUS, @O_STAKEHOLDER_ID, @O_STAKEHOLDER_ROLE, @O_STAKEHOLDER_NAME, @O_STAKEHOLDER_ROLE_NAME, @O_FIFOAPPROVALFLAG);select @O_STAT, @O_STATUS as status, @O_STAKEHOLDER_ID as uname, @O_STAKEHOLDER_ROLE, @O_STAKEHOLDER_NAME as name, @O_STAKEHOLDER_ROLE_NAME, @O_FIFOAPPROVALFLAG;`;
   
-  console.log(sql);
+  //console.log(sql);
   con.query(sql, function(err, results) {
     if (err) throw err;
     else {
-      console.log(results)   
+      //console.log(results)   
      res.send(results);
 
     }
@@ -75,7 +75,7 @@ app.post("/date", function(req, res) {
   //const sql = `update import_req set arrival_date='${req.body.actualDate}' , arrival_time='${req.body.actualTime}' where container_no='${req.body.con_no}'`;
   //console.log(sql);
   const sql=`UPDATE shipper_container_available_details SET SCAD_ACTUAL_ARRIVED_DATE_AT_FACTORY_UPDATED_BY_TRANSPORTER ='${req.body.actualDate}' , SCAD_ACTUAL_ARRIVED_TIME_AT_FACTORY_UPDATED_BY_TRANSPORTER ='${req.body.actualTime}' WHERE SCAD_CONTAINER_NUMBER ='${req.body.con_no}'AND SCAD_TRANSPORTER_ID ='${req.body.username}' AND SCAD_FIFO_REFERENCE_NUMBER = '${req.body.trans_id}'`
-  console.log(sql);
+  //console.log(sql);
   con.query(sql, function(err, results) {
     if (err) throw err;
     res.send("done");
@@ -90,14 +90,14 @@ app.post("/date", function(req, res) {
     }
 });
 var mail_content='<b>From</b>: noreply@fifofuture.in [mailto:noreply@fifofuture.in]<br/><b>Sent</b>: '+new Date()+'<br/><b>To</b>:'+req.body.shipper_mail+'<br/><b>Subject</b>: Cnee : Container arrival notice at factory<br/><br/><br/><br/><label style="font-size:large;font-family:\'Times New Roman\', Times, serif;"><b>Dear Shipper: '+req.body.shipper_name+' we are pleased to confirm arrival of the container No: '+req.body.con_no+' at your factory. Contact truck driver Name & Mobile No: ('+req.body.driver_name+' & '+req.body.mob_number+').</b></label><br/>Regards,<br/>Welcome Team,<br/>fifofuture.in<br/><div style="height: 10px;background-color: grey;"></div><br/><b>Note</b>: This is an auto generated mail please do not reply to this mail. To contact us or send any feedback, please mail us at: fifoadmin@fifofuture.in';
-console.log(mail_content);
+//console.log(mail_content);
 let mailOptions = {
     from: 'noreply@fifofuture.in', 
     to: req.body.shipper_mail, 
     subject: 'Cnee : Container arrival notice at factory',
     html:mail_content,
   };
-console.log(mailOptions);
+//console.log(mailOptions);
 transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
         return console.log(error);
@@ -125,14 +125,14 @@ app.post("/date_consignee", function(req, res) {
     }
 });
 var mail_content='<b>From</b>: noreply@fifofuture.in [mailto:noreply@fifofuture.in]<br/><b>Sent</b>: '+new Date()+'<br/><b>To</b>:'+req.body.consignee_mail+'<br/><b>Subject</b>: Cnee : Container arrival notice at factory<br/><br/><br/><br/><label style="font-size:large;font-family:\'Times New Roman\', Times, serif;"><b>Dear Consignee: '+req.body.consignee_name+' we are pleased to confirm arrival of the container No: '+req.body.con_no+' at your factory. Contact truck driver Name & Mobile No: ('+req.body.driver_name+' & '+req.body.mob_number+').</b></label><br/>Regards,<br/>Welcome Team,<br/>fifofuture.in<br/><div style="height: 10px;background-color: grey;"></div><br/><b>Note</b>: This is an auto generated mail please do not reply to this mail. To contact us or send any feedback, please mail us at: fifoadmin@fifofuture.in';
-console.log(mail_content);
+//console.log(mail_content);
 let mailOptions = {
     from: 'noreply@fifofuture.in', 
     to: req.body.consignee_mail, 
     subject: 'Cnee : Container arrival notice at factory',
     html:mail_content,
   };
-console.log(mailOptions);
+//console.log(mailOptions);
 transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
         return console.log(error);

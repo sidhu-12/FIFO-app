@@ -1,7 +1,8 @@
 {
   "expo": {
     "name": "Transporter",
-    "slug": "fifo_app_with_load",
+    "slug": "fifoapp",
+    "description" :  "An app for the Transporter for containers",
     "privacy": "public",
     "platforms": [
       "ios",
@@ -26,9 +27,8 @@
     "ios": {
       "supportsTablet": true
     },
-    "description": "",
     "android": {
-      "package": "com.fifo_app.Transporter",
+      "package": "com.fifo_future.Transporter",
       "versionCode": 1
     }
   }

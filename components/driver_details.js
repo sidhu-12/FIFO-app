@@ -9,7 +9,7 @@ export default class Driver_Details extends Component{
            name:'',
            mob_no:'',
            truck_no:'',
-           round_trip:'N',
+           round_trip:'Y',
            container_no:this.props.route.params.con_no,
            bl_no:this.props.route.params.bl_no,
            username:this.props.route.params.uname,
@@ -65,7 +65,7 @@ export default class Driver_Details extends Component{
           stopLoading();
          }
        }
-       xhr.open("POST","http://192.168.0.102:3000/driver_details",true);
+       xhr.open("POST","https://fifo-app-server.herokuapp.com/driver_details",true);
        xhr.setRequestHeader("Content-type","application/json");
        //console.log(name);
        xhr.send(JSON.stringify(this.state));
@@ -99,11 +99,9 @@ export default class Driver_Details extends Component{
             style={{ resizeMode: "stretch" }}
             source={require("./fifo.png")}
           />
-          <View style={{ flexDirection: "column" }}>
+          <View>
             <Text style={{ fontSize: 15 }}>
               Driven by <Text style={{ color: "#00c0e2" }}>Technology</Text> ,
-            </Text>
-            <Text style={{ fontSize: 15 }}>
               Defined By <Text style={{ color: "#00c0e2" }}>Humanity</Text>
             </Text>
           </View>
@@ -196,9 +194,10 @@ container: {
   flexDirection: "column",
 },
 imageContainer: {
-  flexDirection: "row",
-  justifyContent: "space-evenly",
+  flexDirection: "column",
+  justifyContent: "center",
   alignItems: "center",
+  marginTop:10
 },
 input: {
   width: WIDTH - 60,

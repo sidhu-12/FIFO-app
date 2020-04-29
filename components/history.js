@@ -41,7 +41,7 @@ var uname, prop1;
       stopLoading();
      }
     }
-    xhr.open("POST","http://192.168.0.102:3000/history",true);
+    xhr.open("POST","https://fifo-app-server.herokuapp.com/history",true);
     xhr.setRequestHeader("Content-type","application/json");
     //console.log(name);
     xhr.send(JSON.stringify(name));
@@ -268,11 +268,9 @@ var uname, prop1;
                 style={{ resizeMode: "stretch" }}
                 source={require("./fifo.png")}
               />
-              <View style={{ flexDirection: "column" }}>
+              <View>
                 <Text style={{ fontSize: 15 }}>
                   Driven by <Text style={{ color: "#00c0e2" }}>Technology</Text> ,
-                </Text>
-                <Text style={{ fontSize: 15 }}>
                   Defined By <Text style={{ color: "#00c0e2" }}>Humanity</Text>
                 </Text>
               </View>
@@ -304,10 +302,10 @@ var uname, prop1;
         padding: 5,
       },
       imageContainer: {
-        flexDirection: "row",
-        justifyContent: "space-evenly",
+        flexDirection: "column",
+        justifyContent: "center",
         alignItems: "center",
-        padding: 5,
+        marginTop:10
       },
       btn1: {
         backgroundColor: "rgba(237, 31, 36,0.95)",
@@ -363,7 +361,7 @@ class History_Shipper extends Component{
          stopLoading();
         }
        }
-       xhr.open("POST","http://192.168.0.102:3000/history_shipper",true);
+       xhr.open("POST","https://fifo-app-server.herokuapp.com/history_shipper",true);
        xhr.setRequestHeader("Content-type","application/json");
        //console.log(name);
        xhr.send(JSON.stringify(name));
@@ -535,11 +533,9 @@ class History_Shipper extends Component{
                    style={{ resizeMode: "stretch" }}
                    source={require("./fifo.png")}
                  />
-                 <View style={{ flexDirection: "column" }}>
+                 <View>
                    <Text style={{ fontSize: 15 }}>
                      Driven by <Text style={{ color: "#00c0e2" }}>Technology</Text> ,
-                   </Text>
-                   <Text style={{ fontSize: 15 }}>
                      Defined By <Text style={{ color: "#00c0e2" }}>Humanity</Text>
                    </Text>
                  </View>

@@ -158,7 +158,7 @@ class Arrived extends Component  {
          }
          
        }
-       xhr.open("POST","http://192.168.0.101:3000/date_consignee",true);
+       xhr.open("POST","https://fifo-app-server.herokuapp.com/date_consignee",true);
        xhr.setRequestHeader("Content-type","application/json");
        xhr.send(JSON.stringify(con));
        const stopLoading=()=>
@@ -208,11 +208,9 @@ class Arrived extends Component  {
             style={{ resizeMode: "stretch" }}
             source={require("./fifo.png")}
           />
-          <View style={{ flexDirection: "column" }}>
+          <View >
             <Text style={{ fontSize: 15 }}>
               Driven by <Text style={{ color: "#00c0e2" }}>Technology</Text> ,
-            </Text>
-            <Text style={{ fontSize: 15 }}>
               Defined By <Text style={{ color: "#00c0e2" }}>Humanity</Text>
             </Text>
           </View>
@@ -317,11 +315,9 @@ class Arrived extends Component  {
           style={{ resizeMode: "stretch" }}
           source={require("./fifo.png")}
         />
-        <View style={{ flexDirection: "column" }}>
+        <View>
           <Text style={{ fontSize: 15 }}>
             Driven by <Text style={{ color: "#00c0e2" }}>Technology</Text> ,
-          </Text>
-          <Text style={{ fontSize: 15 }}>
             Defined By <Text style={{ color: "#00c0e2" }}>Humanity</Text>
           </Text>
         </View>
@@ -427,10 +423,10 @@ container: {
   padding: 5,
 },
 imageContainer: {
-  flexDirection: "row",
-  justifyContent: "space-evenly",
+  flexDirection: "column",
+  justifyContent: "center",
   alignItems: "center",
-  padding: 5,
+  marginTop:10
 },
 container1: {
   flex: 1,
