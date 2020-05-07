@@ -105,7 +105,7 @@ transporter.sendMail(mailOptions, (error, info) => {
     }
     console.log('Message %s sent: %s', info.messageId, info.response);
     });
-    request("http://www.smsintegra.com/api/smsapi.aspx?uid=FIFOFUTURE&pwd=18105&mobile="+req.body.shipper_mobile+"&msg=Dear "+req.body.shipper_name+" We are pleased to confirm arrival of the Container No:"+req.body.con_no+" at your factory.Contact truck Driver Name and Mobile No:( "+req.body.driver_name+" and "+req.body.mob_number+" )&sid=Smsint&type=0&dtNow=dateandtime",function(error,response,body){
+    request("http://www.smsintegra.com/api/smsapi.aspx?uid="+config.sms.user+"&pwd="+config.sms.pass+"&mobile="+req.body.shipper_mobile+"&msg=Dear "+req.body.shipper_name+" We are pleased to confirm arrival of the Container No:"+req.body.con_no+" at your factory.Contact truck Driver Name and Mobile No:( "+req.body.driver_name+" and "+req.body.mob_number+" )&sid="+config.sms.smsid+"&type=0&dtNow=dateandtime",function(error,response,body){
       console.log(body);
     });
   });
@@ -142,9 +142,9 @@ transporter.sendMail(mailOptions, (error, info) => {
     }
     console.log('Message %s sent: %s', info.messageId, info.response);
     });
-    request("http://www.smsintegra.com/api/smsapi.aspx?uid=FIFOFUTURE&pwd=18105&mobile="+req.body.consignee_mobile+"&msg=Dear "+req.body.consignee_name+" We are pleased to confirm arrival of the Container No:"+req.body.con_no+" at your factory.Contact truck Driver Name and Mobile No:( "+req.body.driver_name+" and "+req.body.mob_number+" )&sid=Smsint&type=0&dtNow=dateandtime",function(error,response,body){
+    request("http://www.smsintegra.com/api/smsapi.aspx?uid="+config.sms.user+"&pwd="+config.sms.pass+"&mobile="+req.body.consignee_mobile+"&msg=Dear "+req.body.consignee_name+" We are pleased to confirm arrival of the Container No:"+req.body.con_no+" at your factory.Contact truck Driver Name and Mobile No:( "+req.body.driver_name+" and "+req.body.mob_number+" )&sid="+config.sms.smsid+"&type=0&dtNow=dateandtime",function(error,response,body){
       console.log(body);
-      console.log("http://www.smsintegra.com/api/smsapi.aspx?uid=FIFOFUTURE&pwd=18105&mobile="+req.body.consignee_mobile+"&msg=Dear "+req.body.consignee_name+" We are pleased to confirm arrival of the Container No:"+req.body.con_no+" at your factory.Contact truck Driver Name and Mobile No:( "+req.body.driver_name+" and "+req.body.mob_number+" )&sid=Smsint&type=0&dtNow=dateandtime");
+      //console.log("http://www.smsintegra.com/api/smsapi.aspx?uid=FIFOFUTURE&pwd=18105&mobile="+req.body.consignee_mobile+"&msg=Dear "+req.body.consignee_name+" We are pleased to confirm arrival of the Container No:"+req.body.con_no+" at your factory.Contact truck Driver Name and Mobile No:( "+req.body.driver_name+" and "+req.body.mob_number+" )&sid=Smsint&type=0&dtNow=dateandtime");
         
     });
 });

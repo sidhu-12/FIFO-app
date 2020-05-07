@@ -20,24 +20,24 @@ const styles = StyleSheet.create({
   cardView: {
     flex: 1,
     width: width - 20,
-    margin: 10
+    margin: 10,
   },
   image: {
     resizeMode: "stretch",
     width: width - 20,
     height: height - 50,
-    borderRadius: 10
+    borderRadius: 10,
   },
   descrip: {
-    backgroundColor: "skyblue",
+    backgroundColor: "#00c0e2",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 10
+    marginTop: 10,
   },
   txt: {
     color: "white",
-    fontSize: 17
-  }
+    fontSize: 17,
+  },
 });
 
 export default CarouselItem;

@@ -27,6 +27,12 @@
     "user":"sidharth12899@gmail.com",
     "pass":"carpediem_3594"
 },
+"sms":{
+    "user":"FIFOFUTURE",
+    "pass":"18105",
+    "smsid":"Smsint"
+},
+
 "contact":{
 "header":"Completed transaction for past 30 days"    ,
 "footer":"For additional information \n contact FIFO support:..."},

@@ -1,10 +1,7 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity, BackHandler } from "react-native";
 import Carousel from "./Carousel";
 import { dummyData } from "./Data";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator, Assets } from "@react-navigation/stack";
-const Stack = createStackNavigator();
 
 class Home extends Component {
   constructor(props) {
@@ -43,24 +40,22 @@ class Home extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white"
+    backgroundColor: "white",
   },
   imageContainer: {
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 10
+    marginTop: 10,
   },
   btnLogin: {
     width: 150,
     height: 45,
     borderRadius: 40,
-    backgroundColor: "#4f81bc",
+    backgroundColor: "#00c0e2",
     justifyContent: "center",
     marginTop: 40,
-    borderColor: "#395d8a",
-    borderWidth: 3,
-  }
+  },
 });
 
 export default Home;
