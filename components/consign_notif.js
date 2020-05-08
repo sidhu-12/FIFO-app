@@ -37,7 +37,8 @@ export default class Consign_Notif extends Component {
   }
   acceptForm = (i) => {
     Alert.alert(
-      "Please Update the Driver Details for \n Container Number:" +
+      "Update Driver Details ",
+      "Please update the driver details for \n Container Number:" +
         this.state.op[i].container_no
     );
     this.props.navigation.navigate("Update Driver Details", {
@@ -86,7 +87,7 @@ export default class Consign_Notif extends Component {
         create(this);
       }
       if (this.readyState == 4 && this.status != 200) {
-        Alert.alert("Network Error\nPlease check your network connection");
+        Alert.alert("Network Error","Please check your network connection");
         console.log(this.responseText);
         stopLoading();
       }
@@ -279,7 +280,10 @@ export default class Consign_Notif extends Component {
               {"Container Size  :"} {this.state.op[i].container_size}
             </Text>
             <Text style={{ fontSize: 16 }}>
-              {"Date of Pickup from Port :"} {dop}
+              {"Date of Pickup:"} {dop}
+            </Text>
+            <Text style={{ fontSize: 16 }}>
+             from Port
             </Text>
           </View>
           <View
@@ -384,7 +388,10 @@ export default class Consign_Notif extends Component {
               {"Container Size  :"} {this.state.op[i].container_size}
             </Text>
             <Text style={{ fontSize: 16 }}>
-              {"Date of Pickup from CFS:"} {dop}
+              {"Date of Pickup:"} {dop}
+            </Text>
+            <Text style={{ fontSize: 16 }}>
+             from CFS
             </Text>
           </View>
           <View

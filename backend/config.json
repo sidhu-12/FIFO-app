@@ -23,10 +23,15 @@
         "database": "transporter",
         "port":8889
 },
-<<<<<<< HEAD
 "mail":{
-    "user":"XXXX@gmail.com",
-    "pass":"XXXX"
+    "host": "smtpout.asia.secureserver.net",
+    "port": 465,
+    "secure": true,
+    "auth": {
+        "user":"noreply@fifofuture.in",
+        "pass":"vReply@123" 
+    }
+    
 },
 "sms":{
     "user":"FIFOFUTURE",
@@ -34,8 +39,6 @@
     "smsid":"Smsint"
 },
 
-=======
->>>>>>> a63df7c6dd8a65fce593aaa354901e27bf159582
 "contact":{
 "header":"Completed transaction for past 30 days"    ,
 "footer":"For additional information \n contact FIFO support:..."},

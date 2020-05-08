@@ -142,7 +142,7 @@ class Arrived1 extends Component {
           }
         }
         if (this.readyState == 4 && this.status != 200) {
-          Alert.alert("Network Error\nPlease check your network connection");
+          Alert.alert("Network Error","Please check your network connection");
           stopLoading();
         }
       };

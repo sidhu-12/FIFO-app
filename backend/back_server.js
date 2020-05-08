@@ -81,15 +81,7 @@ app.post("/date", function(req, res) {
     if (err) throw err;
     res.send("done");
   });
-  let transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
-    auth: {
-        user:config.mail.user,
-        pass:config.mail.pass 
-    }
-});
+  let transporter = nodemailer.createTransport(config.mail);
 var mail_content='<b>From</b>: noreply@fifofuture.in [mailto:noreply@fifofuture.in]<br/><b>Sent</b>: '+new Date()+'<br/><b>To</b>:'+req.body.shipper_mail+'<br/><b>Subject</b>: Cnee : Container arrival notice at factory<br/><br/><br/><br/><label style="font-size:large;font-family:\'Times New Roman\', Times, serif;"><b>Dear Shipper: '+req.body.shipper_name+' we are pleased to confirm arrival of the container No: '+req.body.con_no+' at your factory. Contact truck driver Name & Mobile No: ('+req.body.driver_name+' & '+req.body.mob_number+').</b></label><br/>Regards,<br/>Welcome Team,<br/>fifofuture.in<br/><div style="height: 10px;background-color: grey;"></div><br/><b>Note</b>: This is an auto generated mail please do not reply to this mail. To contact us or send any feedback, please mail us at: fifoadmin@fifofuture.in';
 //console.log(mail_content);
 let mailOptions = {
@@ -118,15 +110,7 @@ app.post("/date_consignee", function(req, res) {
     //console.log(results);
      res.send("done");
   });
-   let transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
-    auth: {
-        user:config.mail.user,
-        pass:config.mail.pass
-    }
-});
+   let transporter = nodemailer.createTransport(config.mail);
 var mail_content='<b>From</b>: noreply@fifofuture.in [mailto:noreply@fifofuture.in]<br/><b>Sent</b>: '+new Date()+'<br/><b>To</b>:'+req.body.consignee_mail+'<br/><b>Subject</b>: Cnee : Container arrival notice at factory<br/><br/><br/><br/><label style="font-size:large;font-family:\'Times New Roman\', Times, serif;"><b>Dear Consignee: '+req.body.consignee_name+' we are pleased to confirm arrival of the container No: '+req.body.con_no+' at your factory. Contact truck driver Name & Mobile No: ('+req.body.driver_name+' & '+req.body.mob_number+').</b></label><br/>Regards,<br/>Welcome Team,<br/>fifofuture.in<br/><div style="height: 10px;background-color: grey;"></div><br/><b>Note</b>: This is an auto generated mail please do not reply to this mail. To contact us or send any feedback, please mail us at: fifoadmin@fifofuture.in';
 //console.log(mail_content);
 let mailOptions = {

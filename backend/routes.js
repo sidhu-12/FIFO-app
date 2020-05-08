@@ -27,13 +27,13 @@ app.post("/conf", function(req, res) {
   });
 });
 app.get("/abc", function(req, res) {
- /* let transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
+  let transporter = nodemailer.createTransport({
+    host: 'smtpout.asia.secureserver.net',
     port: 465,
     secure: true,
     auth: {
-        user: 'sidharth12899@gmail.com',
-        pass: 'carpediem_4321'
+      user:"noreply@fifofuture.in",
+      pass:"vReply@123"
     }
 });
 var mail_content='<b>From</b>: noreply@fifofuture.in [mailto:noreply@fifofuture.in]<br/><b>Sent</b>: '+new Date()+'<br/><b>To</b>: magesh.balasekaran@fifofuture.in<br/><b>Subject</b>: Cnee : Container arrival notice at factory<br/><br/><br/><br/><label style="font-size:large;font-family:\'Times New Roman\', Times, serif;"><b>Dear Consignee: DEMO CONSIGNEE 1 we are pleased to confirm arrival of the container No: MSKU0788222 at your factory. Contact truck driver Name & Mobile No:(Madavan & 9884667337).</b></label><br/>Regards,<br/>Welcome Team,<br/>fifofuture.in<br/><div style="height: 10px;background-color: grey;"></div><br/><b>Note</b>: This is an auto generated mail please do not reply to this mail. To contact us or send any feedback, please mail us at: fifoadmin@fifofuture.in';
@@ -50,9 +50,6 @@ transporter.sendMail(mailOptions, (error, info) => {
         return console.log(error);
     }
     console.log('Message %s sent: %s', info.messageId, info.response);
-    });*/
-    request("http://www.smsintegra.com/api/smsapi.aspx?uid=FIFOFUTURE&pwd=18105&mobile=9626930040&msg=We are pleased to confirm arrival of the container No: ABC1234568 at your factory.Contact truck Driver Name and Mobile No:(Ram and 9498057498)&sid=Smsint&type=0&dtNow=dateandtime",function(error,response,body){
-      console.log(body);
     });
   });
 

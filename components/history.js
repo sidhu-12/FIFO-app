@@ -51,7 +51,7 @@ class History_Consignee extends Component {
         create(this);
       }
       if (this.readyState == 4 && this.status != 200) {
-        Alert.alert("Network Error\nPlease check your network connection");
+        Alert.alert("Network Error","Please check your network connection");
         stopLoading();
       }
     };
@@ -300,8 +300,11 @@ class History_Consignee extends Component {
               {this.state.op[i].container_size}
             </Text>
             <Text style={{ fontSize: 16 }}>
-              {"Date of Pickup from Port: "}
+              {"Date of Pickup: "}
               {dop}
+            </Text>
+            <Text style={{ fontSize: 16 }}>
+             from Port
             </Text>
           </View>
           <View
@@ -395,8 +398,11 @@ class History_Consignee extends Component {
               {this.state.op[i].container_size}
             </Text>
             <Text style={{ fontSize: 16 }}>
-              {"Date of Pickup from CFS: "}
+              {"Date of Pickup: "}
               {dop}
+            </Text>
+            <Text style={{ fontSize: 16 }}>
+             from CFS
             </Text>
           </View>
           <View
@@ -557,7 +563,7 @@ class History_Shipper extends Component {
         create(this);
       }
       if (this.readyState == 4 && this.status != 200) {
-        Alert.alert("Network Error\nPlease check your network connection");
+        Alert.alert("Network Error","Please check your network connection");
         stopLoading();
       }
     };

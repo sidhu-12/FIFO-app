@@ -33,7 +33,8 @@ export default class Confirmed_Req extends Component {
   }
   acceptForm = (i) => {
     Alert.alert(
-      " Please enter the arrival date and time\n for container number: " +
+      "Update arrival date and time",
+      "Please update the arrival date and time for \ncontainer number: " +
         this.state.op[i].container_no
     );
     this.props.navigation.navigate("Update Arrival Time and Date", {
@@ -59,7 +60,7 @@ export default class Confirmed_Req extends Component {
         create(this);
       }
       if (this.readyState == 4 && this.status != 200) {
-        Alert.alert("Network Error\nPlease check your network connection");
+        Alert.alert("Network Error","Please check your network connection");
         stopLoading();
       }
     };
@@ -278,8 +279,11 @@ export default class Confirmed_Req extends Component {
               {this.state.op[i].container_size}
             </Text>
             <Text style={{ fontSize: 16 }}>
-              {"Date of Pickup From Port: "}
+              {"Date of Pickup: "}
               {dop}
+            </Text>
+            <Text style={{ fontSize: 16 }}>
+             from Port
             </Text>
           </View>
           <View
@@ -396,8 +400,11 @@ export default class Confirmed_Req extends Component {
               {this.state.op[i].container_size}
             </Text>
             <Text style={{ fontSize: 16 }}>
-              {"Date of Pickup From CFS: "}
+              {"Date of Pickup: "}
               {dop}
+            </Text>
+            <Text style={{ fontSize: 16 }}>
+             from CFS
             </Text>
           </View>
           <View

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity, BackHandler } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity, BackHandler,Alert } from "react-native";
 import Carousel from "./Carousel";
 import { dummyData } from "./Data";
 
@@ -10,6 +10,25 @@ class Home extends Component {
   submitForm = () => {
     this.props.navigation.navigate("Login");
   };
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.backPressed);
+ }
+ 
+ componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.backPressed);
+ }
+ 
+ backPressed = () => {
+   Alert.alert(
+     'Exit App',
+     'Do you want to exit?',
+     [
+       {text: 'No', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+       {text: 'Yes', onPress: () => BackHandler.exitApp()},
+     ],
+     { cancelable: false });
+     return true;
+ }
   render() {
     return (
       <View style={styles.container}>

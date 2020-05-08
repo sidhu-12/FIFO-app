@@ -34,6 +34,7 @@ class Login extends Component {
       toggleText: "Show",
       keyboardOffset: 0,
       load: false,
+      loginInProcess:false,
     };
   }
 
@@ -53,7 +54,7 @@ class Login extends Component {
     const { username, password } = this.state;
     if (this.state.username == "" || this.state.password == "") {
       Alert.alert("Please enter the username or password");
-      this.setState({ load: false });
+      this.setState({ load: false,loginInProcess:false });
     } else {
       var auth = {
         username: username,
@@ -67,7 +68,7 @@ class Login extends Component {
           validate(this);
         }
         if (this.readyState == 4 && this.status != 200) {
-          Alert.alert("Network Error\nPlease check your network connection");
+          Alert.alert("Network Error","Please check your network connection");
           console.log(this.responseText);
           stopLoading();
         }
@@ -85,7 +86,8 @@ class Login extends Component {
         if (res[res.length - 1][0].status == "LOGIN SUCCESSFULL") {
           Alert.alert(res[res.length - 1][0].status);
           this.setState({ load: false });
-          //this.props.navigation.pop();
+          this.props.navigation.pop();
+          this.props.navigation.push("Login");
           this.props.navigation.navigate("Dashboard", {
             id: res[res.length - 1][0].uname,
             name: res[res.length - 1][0].name,
@@ -93,7 +95,9 @@ class Login extends Component {
         } else {
           this.setState({ load: false });
           Alert.alert(res[res.length - 1][0].status + "\nPlease try again");
+          this.setState({loginInProcess:false})
         }
+        
       };
     }
   };
@@ -143,7 +147,15 @@ class Login extends Component {
               <Text style={{ fontSize: 15 }}>{this.state.toggleText}</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={this.submitForm} style={styles.btnLogin}>
+            <TouchableOpacity onPress={()=>{
+              if(this.state.loginInProcess==false)
+              {
+                this.setState({loginInProcess:true});
+                this.submitForm();
+              }
+
+              
+            }} style={styles.btnLogin}>
               <Text
                 style={{ color: "white", fontSize: 20, textAlign: "center" }}
               >
