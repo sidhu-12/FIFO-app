@@ -17,7 +17,11 @@ con.connect(function(error) {
   if (error) console.log(error);
   else console.log("connected");
 });
-
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers","Content-type") 
+  next();
+});
 app.post("/conf", function(req, res) {
   con.query(`SELECT * FROM import_req where username='${req.body.username}' and accepted=1 and arrival_date is null`, function(error, results) {
     //con.query(`Call conf_req(?)`,[req.body.username], function(error, results) {
@@ -26,32 +30,10 @@ app.post("/conf", function(req, res) {
     res.send(results);
   });
 });
-app.get("/abc", function(req, res) {
-  let transporter = nodemailer.createTransport({
-    host: 'smtpout.asia.secureserver.net',
-    port: 465,
-    secure: true,
-    auth: {
-      user:"noreply@fifofuture.in",
-      pass:"vReply@123"
-    }
+app.post("/abc", function(req, res) {
+  console.log(req.body);
+  res.send("Uploaded Successfully");
 });
-var mail_content='<b>From</b>: noreply@fifofuture.in [mailto:noreply@fifofuture.in]<br/><b>Sent</b>: '+new Date()+'<br/><b>To</b>: magesh.balasekaran@fifofuture.in<br/><b>Subject</b>: Cnee : Container arrival notice at factory<br/><br/><br/><br/><label style="font-size:large;font-family:\'Times New Roman\', Times, serif;"><b>Dear Consignee: DEMO CONSIGNEE 1 we are pleased to confirm arrival of the container No: MSKU0788222 at your factory. Contact truck driver Name & Mobile No:(Madavan & 9884667337).</b></label><br/>Regards,<br/>Welcome Team,<br/>fifofuture.in<br/><div style="height: 10px;background-color: grey;"></div><br/><b>Note</b>: This is an auto generated mail please do not reply to this mail. To contact us or send any feedback, please mail us at: fifoadmin@fifofuture.in';
-console.log(mail_content)
-let mailOptions = {
-    from: 'noreply@fifofuture.in', 
-    to: 'sidharth12899@gmail.com', 
-    subject: 'Cnee : Container arrival notice at factory',
-    html:mail_content,
-  };
-console.log(mailOptions);
-transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-        return console.log(error);
-    }
-    console.log('Message %s sent: %s', info.messageId, info.response);
-    });
-  });
 
 
 app.post("/auth", function(req, res) {
